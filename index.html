@@ -1,0 +1,1952 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>St. George Spirits — America's Original Craft Distillery, Alameda California</title>
+<meta name="description" content="America's original artisan distillery since 1982. Gin, vodka, whiskey, brandy and absinthe made in a decommissioned airplane hangar in Alameda, California.">
+
+<!-- ============================================================
+     SHARE CARD / IDENTITY
+     SITE_ORIGIN is the one thing to change on deploy. Open Graph
+     requires ABSOLUTE urls for og:image — relative paths are
+     dropped by Slack, iMessage, LinkedIn and X alike.
+     ============================================================ -->
+<link rel="canonical" href="https://stgeorge-concept.vercel.app/">
+<meta name="theme-color" content="#110C07">
+<meta name="robots" content="noindex,nofollow">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="St. George Spirits">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://stgeorge-concept.vercel.app/">
+<meta property="og:title" content="St. George Spirits — America's Original Craft Distillery">
+<meta property="og:description" content="In 1982 there were fewer than twenty distilleries in the whole country. We were one of them. Pot-distilled in a decommissioned airplane hangar in Alameda, California.">
+<meta property="og:image" content="https://stgeorge-concept.vercel.app/assets/img/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The back bar of a saloon, bottles lit from behind, with the St. George Spirits wordmark.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="St. George Spirits — America's Original Craft Distillery">
+<meta name="twitter:description" content="In 1982 there were fewer than twenty distilleries in the whole country. We were one of them.">
+<meta name="twitter:image" content="https://stgeorge-concept.vercel.app/assets/img/og-card.jpg">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@300;400;500;600&family=Archivo:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Distillery",
+  "@id": "https://stgeorge-concept.vercel.app/#org",
+  "name": "St. George Spirits",
+  "url": "https://stgeorge-concept.vercel.app/",
+  "logo": "https://stgeorge-concept.vercel.app/assets/img/apple-touch-icon.png",
+  "image": "https://stgeorge-concept.vercel.app/assets/img/og-card.jpg",
+  "description": "America's original artisan distillery. Pot-distilled gin, vodka, whiskey, brandy and absinthe made in a decommissioned airplane hangar in Alameda, California since 1982.",
+  "foundingDate": "1982",
+  "telephone": "+1-510-769-1601",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2601 Monarch Street",
+    "addressLocality": "Alameda",
+    "addressRegion": "CA",
+    "postalCode": "94501",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 37.7731,
+    "longitude": -122.2983
+  },
+  "founder": [
+    {
+      "@type": "Person",
+      "name": "Jörg Rupf"
+    }
+  ],
+  "employee": [
+    {
+      "@type": "Person",
+      "name": "Lance Winters",
+      "jobTitle": "Master Distiller"
+    },
+    {
+      "@type": "Person",
+      "name": "Dave Smith",
+      "jobTitle": "Head Distiller"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Spirits",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Product",
+          "name": "Terroir Gin",
+          "url": "https://stgeorge-concept.vercel.app/spirits/terroir-gin.html"
+        },
+        "price": "35",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Product",
+          "name": "Baller American Single Malt Whiskey",
+          "url": "https://stgeorge-concept.vercel.app/spirits/baller-single-malt.html"
+        },
+        "price": "50",
+        "priceCurrency": "USD"
+      }
+    ]
+  }
+}
+</script>
+<link rel="stylesheet" href="assets/css/base.css">
+<style>
+/* the bottle travels into the product page — see site.js */
+@view-transition{ navigation: auto; }
+::view-transition-old(root){ animation:vt-out .36s var(--ease) both; }
+::view-transition-new(root){ animation:vt-in .46s var(--ease) both; }
+@keyframes vt-out{ to{ opacity:0; } }
+@keyframes vt-in{ from{ opacity:0; } }
+@media (prefers-reduced-motion: reduce){
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*){ animation:none !important; }
+}
+</style>
+<style>
+/* ============================================================
+   AGE GATE — brand stays visible behind it (Westward pattern)
+   ============================================================ */
+#gate{
+  position:fixed; inset:0; z-index:200; display:grid; place-items:center;
+  padding:24px; background:rgba(11,8,5,.78); backdrop-filter:blur(7px) saturate(.8);
+  transition:opacity .7s var(--ease), visibility .7s;
+}
+#gate[hidden]{ display:none; }
+#gate.is-out{ opacity:0; visibility:hidden; }
+#gate .poster{
+  position:relative; width:min(540px,100%); padding:clamp(28px,4vw,48px);
+  background:linear-gradient(170deg,#1b130c,#120c07);
+  border:1px solid rgba(192,142,60,.4);
+  box-shadow:0 50px 120px rgba(0,0,0,.72), inset 0 0 0 7px rgba(11,8,5,.9), inset 0 0 0 8px rgba(192,142,60,.22);
+  text-align:center;
+}
+#gate .mark{ font-family:var(--f-wood); font-size:clamp(26px,3.6vw,38px); color:var(--paper); line-height:1; }
+#gate .sub{ font-family:var(--f-cond); font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--brass); margin-top:12px; }
+#gate .rule{ height:1px; background:linear-gradient(90deg,transparent,rgba(192,142,60,.55),transparent); margin:26px 0; }
+#gate h2{ font-family:var(--f-wood); font-size:clamp(28px,4.4vw,44px); color:var(--paper); }
+#gate p{ margin:12px auto 0; max-width:38ch; font-size:14px; color:var(--bone); }
+.gate-fields{ display:grid; gap:12px; margin-top:26px; text-align:left; }
+.gate-fields label{ font-family:var(--f-cond); font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:7px; }
+.gate-fields input, .gate-fields select{
+  width:100%; padding:13px 15px; font-family:var(--f-body); font-size:15px;
+  color:var(--paper); background:rgba(0,0,0,.42); border:1px solid rgba(201,185,155,.26);
+  border-radius:0; appearance:none;
+}
+.gate-fields input:focus, .gate-fields select:focus{ outline:2px solid var(--brass); outline-offset:1px; }
+.gate-fields select{ background-image:linear-gradient(45deg,transparent 50%,var(--bone) 50%),linear-gradient(135deg,var(--bone) 50%,transparent 50%); background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%; background-size:6px 6px,6px 6px; background-repeat:no-repeat; }
+.gate-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+#gate .btn{ width:100%; justify-content:center; margin-top:18px; }
+#gate .turn{ display:inline-block; margin-top:18px; font-size:12px; color:var(--muted); border-bottom:1px solid rgba(139,126,105,.4); padding-bottom:2px; }
+#gate .turn:hover{ color:var(--bone); }
+#gate .err{ color:var(--rust); font-family:var(--f-cond); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-top:14px; min-height:18px; }
+
+/* ============================================================
+   HERO — scroll-scrubbed full-bleed video
+   ============================================================ */
+.hero{ position:relative; height:200vh; background:var(--ink); }
+.hero-stage{
+  position:sticky; top:0; height:100svh; width:100%; overflow:hidden;
+  background:var(--ink);
+}
+.hero-poster{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:url('assets/img/hero-poster.webp') center 56%/cover no-repeat;
+  transform-origin:51% 60%; will-change:transform;
+}
+.hero-stage video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transform-origin:51% 60%; will-change:transform; opacity:0; z-index:1;
+  transition:opacity .5s var(--ease); pointer-events:none; background:transparent;
+}
+.hero-stage.ready video{ opacity:1; }
+.hero-grade{
+  position:absolute; inset:0; pointer-events:none; z-index:2;
+  background:
+    linear-gradient(180deg, rgba(10,7,4,.72) 0%, rgba(10,7,4,.12) 26%, rgba(10,7,4,.05) 54%, rgba(10,7,4,.82) 100%),
+    radial-gradient(130% 95% at 50% 52%, transparent 38%, rgba(10,7,4,.62) 100%);
+}
+/* the house lights going down on the bar before the hand-off */
+.hero-door{
+  position:absolute; inset:0; pointer-events:none; z-index:4; opacity:0;
+  background:radial-gradient(62% 66% at 50% 56%, rgba(8,5,3,0) 0%, rgba(8,5,3,.42) 52%, rgba(8,5,3,.96) 100%);
+}
+.hero-plate{
+  position:absolute; inset:0; z-index:5; display:grid; place-items:center;
+  text-align:center; padding:0 var(--gut); pointer-events:none; will-change:transform,opacity,filter;
+}
+.hero-plate .inner{ max-width:1100px; }
+.hero-plate .inner{ position:relative; }
+.hero-plate .inner::before{
+  content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:170%; height:300%; z-index:-1; pointer-events:none;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(8,5,3,.76) 0%, rgba(8,5,3,.46) 46%, rgba(8,5,3,0) 76%);
+}
+#plate1 .mark{
+  font-family:var(--f-wood); font-size:clamp(40px,9vw,142px); line-height:.92;
+  color:var(--paper); text-shadow:0 10px 60px rgba(0,0,0,.8);
+}
+#plate1 .mark em{ font-style:normal; display:block; }
+#plate1 .kicker{
+  font-family:var(--f-cond); font-size:clamp(10px,1.2vw,13px); letter-spacing:.5em; font-weight:500;
+  text-transform:uppercase; color:#E3BE78; margin-bottom:clamp(16px,2.4vw,30px);
+  text-shadow:0 2px 16px rgba(0,0,0,.95), 0 0 30px rgba(0,0,0,.8);
+}
+#plate1 .under{
+  margin-top:clamp(18px,2.6vw,34px); font-family:var(--f-cond); font-weight:300;
+  font-size:clamp(12px,1.5vw,17px); letter-spacing:.3em; text-transform:uppercase; color:var(--bone);
+}
+.hero-plate .line{
+  font-family:var(--f-cond); font-weight:300; font-size:clamp(21px,3.4vw,50px);
+  line-height:1.18; letter-spacing:.006em; color:var(--paper);
+  text-shadow:0 2px 12px rgba(0,0,0,.92), 0 8px 44px rgba(0,0,0,.8);
+}
+.hero-plate .line b{ font-weight:500; color:#E3BE78; }
+#plate2{ opacity:0; }
+.hero-hint{
+  position:absolute; left:50%; bottom:clamp(26px,5vh,54px); transform:translateX(-50%);
+  z-index:6; display:flex; flex-direction:column; align-items:center; gap:11px;
+  font-family:var(--f-cond); font-size:10px; letter-spacing:.42em; text-transform:uppercase;
+  color:rgba(239,228,206,.72); transition:opacity .5s var(--ease); pointer-events:none;
+}
+.hero-hint svg{ animation:bob 1.9s ease-in-out infinite; }
+@keyframes bob{ 0%,100%{ transform:translateY(0); opacity:.45 } 50%{ transform:translateY(6px); opacity:1 } }
+/* The last of the push-through: everything resolves to the page's own ink so
+   the sticky stage releases into the ticker with no visible seam. */
+.hero-out{
+  position:absolute; inset:0; z-index:8; opacity:0; pointer-events:none;
+  background:var(--ink);
+}
+.hero-rule{ position:absolute; left:0; right:0; bottom:0; height:2px; background:rgba(239,228,206,.1); z-index:7; }
+.hero-rule i{ display:block; height:100%; background:linear-gradient(90deg,var(--rust-lo),var(--brass)); transform:scaleX(0); transform-origin:left; }
+.hero-badge{
+  position:absolute; right:var(--gut); bottom:clamp(26px,5vh,54px); z-index:6;
+  font-family:var(--f-cond); font-size:9.5px; letter-spacing:.3em; text-transform:uppercase;
+  color:rgba(239,228,206,.42); text-align:right; line-height:1.9; pointer-events:none;
+}
+@media (max-width:760px){ .hero-badge{ display:none; } .hero{ height:180vh; } }
+
+/* ============================================================
+   ABOUT — "inside"
+   ============================================================ */
+.about{ position:relative; background:var(--ink); padding:clamp(80px,11vw,150px) var(--gut) clamp(60px,8vw,110px); overflow:clip; }
+.about::before{
+  content:""; position:absolute; inset:0 0 auto; height:340px;
+  background:linear-gradient(180deg, rgba(8,5,3,1), rgba(17,12,7,0));
+  pointer-events:none; z-index:2;
+}
+.about-bg{
+  position:absolute; inset:0; background:url('assets/img/stills.webp') center 30%/cover no-repeat;
+  opacity:.12; filter:saturate(.5) contrast(1.1); z-index:0;
+}
+.about-in{ position:relative; z-index:4; max-width:1340px; margin:0 auto; }
+.about-head{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,80px); align-items:end; margin-bottom:clamp(44px,6vw,80px); }
+.about-head h2 em{ font-style:normal; font-family:var(--f-wood); text-transform:none; color:var(--brass); font-size:.86em; }
+@media (max-width:900px){ .about-head{ grid-template-columns:1fr; align-items:start; } }
+
+.founders{ position:relative; margin:clamp(34px,4.6vw,60px) 0 clamp(34px,4.6vw,58px); }
+.founders figure{ margin:0; position:relative; overflow:hidden; border:1px solid rgba(201,185,155,.16); }
+.founders img{ width:100%; aspect-ratio:21/9; object-fit:cover; object-position:center 32%; filter:saturate(.72) contrast(1.04); }
+.founders figure::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(14,10,6,.22),rgba(14,10,6,.12) 45%,rgba(14,10,6,.8)); pointer-events:none; }
+.founders figcaption{ position:absolute; left:clamp(18px,3vw,38px); bottom:clamp(16px,2.6vw,30px); z-index:2;
+  font-family:var(--f-cond); font-size:clamp(11px,1.15vw,13px); letter-spacing:.26em; text-transform:uppercase; color:var(--paper); }
+.founders figcaption b{ display:block; font-weight:400; color:var(--brass); font-size:.86em; letter-spacing:.3em; margin-bottom:7px; }
+@media (max-width:700px){ .founders img{ aspect-ratio:4/3; } }
+
+.distillers{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,2.4vw,34px); }
+@media (max-width:980px){ .distillers{ grid-template-columns:1fr; } }
+.card{
+  position:relative; background:linear-gradient(170deg,#1b140d,#130d08);
+  border:1px solid rgba(201,185,155,.15); overflow:hidden;
+  transition:border-color .5s var(--ease), transform .6s var(--ease);
+}
+.card:hover{ border-color:rgba(192,142,60,.48); transform:translateY(-5px); }
+.card .shot{ position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--ink-3); }
+.card .shot img{ width:100%; height:100%; object-fit:cover; filter:saturate(.62) contrast(1.06); transition:transform 1.3s var(--ease), filter .7s; }
+.card:hover .shot img{ transform:scale(1.06); filter:saturate(.9) contrast(1.02); }
+.card .shot::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(17,12,7,.1),rgba(17,12,7,.86)); }
+.card .role{
+  position:absolute; left:20px; bottom:16px; z-index:2;
+  font-family:var(--f-cond); font-size:10px; letter-spacing:.34em; text-transform:uppercase; color:var(--brass);
+}
+.card .body{ padding:22px 24px 26px; }
+.card h3{ font-family:var(--f-wood); font-size:clamp(20px,2vw,27px); line-height:1.08; margin-bottom:12px; }
+.card p{ margin:0; font-size:14px; line-height:1.64; color:var(--bone); }
+.card .more{ margin-top:18px; display:inline-flex; align-items:center; gap:9px; font-family:var(--f-cond); font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted); }
+.card:hover .more{ color:var(--paper); }
+
+.thread{
+  margin-top:clamp(44px,6vw,80px); padding:clamp(32px,4.6vw,60px);
+  border:1px solid rgba(192,142,60,.26); background:rgba(192,142,60,.05);
+  display:grid; grid-template-columns:auto 1fr; gap:clamp(24px,4vw,56px); align-items:center;
+}
+@media (max-width:860px){ .thread{ grid-template-columns:1fr; } }
+.thread .big{ font-family:var(--f-wood); font-size:clamp(30px,4.4vw,56px); line-height:1; color:var(--brass); white-space:nowrap; }
+.thread p{ margin:0; font-size:clamp(15px,1.5vw,19px); line-height:1.6; color:var(--paper); }
+.thread p span{ color:var(--muted); display:block; margin-top:12px; font-size:14px; line-height:1.62; }
+
+/* ============================================================
+   BACK BAR — interactive bottle shelf
+   ============================================================ */
+.backbar{ position:relative; background:linear-gradient(180deg,var(--ink) 0%, #140E08 35%, #1A120B 100%); padding:clamp(70px,9vw,120px) 0 clamp(50px,6vw,80px); overflow:clip; }
+.backbar::before{
+  content:""; position:absolute; inset:0; z-index:0; opacity:.5;
+  background:radial-gradient(70% 55% at 50% 38%, rgba(192,142,60,.14), transparent 70%);
+}
+.bb-head{ position:relative; z-index:4; text-align:center; padding:0 var(--gut); margin-bottom:clamp(20px,3vw,40px); }
+.bb-head h2{ margin-bottom:14px; }
+.bb-head p{ margin:0 auto; max-width:56ch; color:var(--bone); font-size:clamp(14px,1.3vw,17px); }
+
+.bar-stage{
+  position:relative; z-index:4; width:100%; touch-action:pan-y; user-select:none;
+  overflow-x:clip;
+}
+.bar-stage:focus{ outline:none; }
+
+/* the shelf plank */
+.plank{ position:absolute; left:0; right:0; z-index:5; pointer-events:none; }
+.plank .top{
+  position:absolute; left:0; right:0; top:0; height:100%;
+  background:
+    linear-gradient(180deg,#53391F 0%, #6B4927 14%, #4A331C 52%, #35230F 100%);
+  box-shadow:0 1px 0 rgba(239,228,206,.14) inset, 0 18px 34px rgba(0,0,0,.6);
+}
+.plank .grainy{
+  position:absolute; inset:0; opacity:.45; mix-blend-mode:overlay;
+  background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.26) 0 2px, transparent 2px 9px, rgba(255,255,255,.1) 9px 10px, transparent 10px 23px);
+}
+.plank .lip{ position:absolute; left:0; right:0; top:100%; height:12px; background:linear-gradient(180deg,#2E1C0C,#140C04); box-shadow:0 14px 30px rgba(0,0,0,.72); }
+.plank .glow{ position:absolute; left:6%; right:6%; top:-2px; height:2px; background:linear-gradient(90deg,transparent,rgba(239,228,206,.3),transparent); }
+.plank .brkt{ position:absolute; width:16px; background:linear-gradient(90deg,#6B4927,#3A2713 60%,#241708); top:100%; height:34px; }
+
+/* each bottle */
+.bot{
+  position:absolute; left:0; z-index:10; display:block; padding:0;
+  cursor:pointer; background:none; outline:none;
+}
+.bot:focus-visible{ outline:2px solid var(--brass); outline-offset:8px; }
+.bot-sway{ position:absolute; inset:0; transform-origin:50% 100%; }
+.bot-turn{ position:absolute; inset:0; transform-origin:50% 92%; }
+.bot-turn img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:bottom center; -webkit-user-drag:none; }
+.bot-shadow{
+  position:absolute; left:50%; bottom:-4px; height:18px; border-radius:50%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,.8), transparent 72%);
+  transform:translateX(-50%); pointer-events:none; filter:blur(4px); z-index:0;
+}
+.bot-refl{
+  position:absolute; left:0; right:0; top:100%; height:26%; pointer-events:none; z-index:0;
+  overflow:hidden; opacity:.26;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.85),transparent 78%);
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.85),transparent 78%);
+}
+.bot-refl img{ position:absolute; left:0; bottom:100%; width:100%; height:385%;
+  object-fit:contain; object-position:bottom center; transform:scaleY(-1); transform-origin:50% 100%; }
+/* hanging brass price tag */
+.bot-tag{
+  position:absolute; z-index:3; transform-origin:50% 0; pointer-events:none;
+  display:flex; flex-direction:column; align-items:center;
+}
+.bot-tag .str{ width:1px; height:14px; background:rgba(239,228,206,.46); }
+.bot-tag .chip{
+  position:relative; padding:6px 10px 5px; background:linear-gradient(165deg,#E7D9B9,#C9B693);
+  color:#2A1A0B; font-family:var(--f-cond); font-size:11px; font-weight:600; letter-spacing:.07em;
+  line-height:1; white-space:nowrap; box-shadow:0 4px 10px rgba(0,0,0,.52);
+  clip-path:polygon(0 18%, 50% 0, 100% 18%, 100% 100%, 0 100%);
+  padding-top:10px;
+}
+.bot-tag .chip::after{ content:""; position:absolute; left:50%; top:5px; width:3px; height:3px; margin-left:-1.5px; border-radius:50%; background:rgba(42,26,11,.55); }
+.bot-open{
+  position:absolute; left:50%; transform:translateX(-50%); white-space:nowrap;
+  font-family:var(--f-cond); font-size:9.5px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--ink); background:var(--brass); padding:5px 11px 4px; opacity:0;
+  transition:opacity .3s var(--ease); pointer-events:none;
+}
+.bot[data-front] .bot-open{ opacity:1; }
+
+.bb-caption{ position:relative; z-index:4; text-align:center; padding:0 var(--gut); margin-top:clamp(26px,3.6vw,46px); min-height:92px; }
+.bb-caption .nm{ font-family:var(--f-wood); font-size:clamp(19px,2.3vw,30px); line-height:1.1; transition:opacity .3s; }
+.bb-caption .meta{ margin-top:10px; font-family:var(--f-cond); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--brass); }
+.bb-caption .hintline{ margin-top:8px; font-size:13px; color:var(--muted); }
+.bb-dots{ display:flex; justify-content:center; gap:7px; margin-top:22px; position:relative; z-index:4; }
+.bb-dots[hidden]{ display:none; }
+.bb-dots button{ width:6px; height:6px; border-radius:99px; background:rgba(201,185,155,.26); transition:width .35s var(--ease), background .35s; }
+.bb-dots button[aria-current="true"]{ width:24px; background:var(--brass); }
+.bb-foot{ position:relative; z-index:4; text-align:center; margin-top:clamp(26px,3.4vw,42px); padding:0 var(--gut); }
+.bb-foot .small{ margin-top:16px; }
+
+/* --- detail overlay --- */
+.detail{
+  position:fixed; inset:0; z-index:150; display:grid; place-items:center;
+  padding:clamp(18px,3vw,44px); overflow-y:auto;
+}
+.detail .scrim{ position:absolute; inset:0; background:rgba(9,6,3,.93); backdrop-filter:blur(18px); opacity:0; transition:opacity .4s var(--ease); }
+.detail.in .scrim{ opacity:1; }
+.detail .close{
+  position:absolute; top:clamp(14px,2vw,26px); right:clamp(14px,2vw,26px); z-index:4;
+  display:inline-flex; align-items:center; gap:9px; padding:10px 16px;
+  font-family:var(--f-cond); font-size:11px; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--muted); border:1px solid rgba(201,185,155,.22); opacity:0; outline:none;
+  transition:opacity .4s var(--ease) .1s, color .3s, border-color .3s;
+}
+.detail .close:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+.detail.in .close{ opacity:1; }
+.detail .close:hover{ color:var(--paper); border-color:var(--paper); }
+.detail .wrap{
+  position:relative; z-index:3; display:grid; grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(22px,5vw,72px); align-items:center; width:100%; max-width:1020px;
+}
+.detail .figure{ position:relative; height:min(62svh,560px); aspect-ratio:var(--ar,.3); perspective:1300px; cursor:grab; }
+.detail .figure:active{ cursor:grabbing; }
+.detail .spin{ position:absolute; inset:0; transform-style:preserve-3d; }
+.detail .face{ position:absolute; inset:0; backface-visibility:hidden; }
+.detail .face img{ width:100%; height:100%; object-fit:contain; }
+.detail .face.notes{ transform:rotateY(180deg); display:grid; }
+.notecard{
+  align-self:center; justify-self:center; background:linear-gradient(168deg,#EFE4CE,#D9C9A8); color:#241A11;
+  padding:18px 17px; box-shadow:0 30px 60px rgba(0,0,0,.6);
+  border:1px solid rgba(42,26,11,.25); width:max(100%, 225px);
+  display:flex; flex-direction:column; justify-content:center; gap:10px;
+}
+.notecard h4{ margin:0; font-family:var(--f-wood); font-size:clamp(13px,1.5vw,17px); line-height:1.1; }
+.notecard .ln{ height:1px; background:rgba(42,26,11,.3); }
+.notecard p{ margin:0; font-size:clamp(10.5px,1.1vw,13px); line-height:1.52; color:#3B2B18; }
+.notecard .sm{ font-family:var(--f-cond); font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:#7E6244; }
+.detail .info .idx{ font-family:var(--f-cond); font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); }
+.detail .info h3{ font-family:var(--f-wood); font-size:clamp(25px,4vw,48px); line-height:1.02; margin:14px 0 0; }
+.detail .info .pricerow{ display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-top:18px; }
+.detail .info .pr{ font-family:var(--f-cond); font-size:clamp(24px,3vw,36px); font-weight:500; color:var(--brass); line-height:1; }
+.detail .info .chip{ font-family:var(--f-cond); font-size:11px; letter-spacing:.2em; text-transform:uppercase; border:1px solid rgba(201,185,155,.3); padding:6px 11px; color:var(--bone); }
+.detail .info > p{ margin:20px 0 0; font-size:clamp(14px,1.25vw,16px); line-height:1.62; color:var(--bone); max-width:50ch; }
+.detail .facebtns{ display:inline-flex; margin-top:24px; border:1px solid rgba(201,185,155,.28); }
+.detail .facebtns button{ padding:10px 18px; font-family:var(--f-cond); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); transition:all .3s var(--ease); }
+.detail .facebtns button[aria-pressed="true"]{ background:var(--brass); color:var(--ink); }
+.detail .acts{ display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; }
+.detail .info{ opacity:0; transform:translateY(10px); transition:opacity .5s var(--ease) .15s, transform .5s var(--ease) .15s; }
+.detail.in .info{ opacity:1; transform:none; }
+@media (max-width:760px){
+  .detail .wrap{ grid-template-columns:1fr; justify-items:center; text-align:center; }
+  .detail .figure{ height:min(40svh,330px); }
+  .detail .info > p{ max-width:none; }
+  .detail .acts, .detail .pricerow{ justify-content:center; }
+}
+
+/* ============================================================
+   BARKEEP — guided selling
+   ============================================================ */
+.barkeep{ position:relative; background:var(--ink-2); border-top:var(--hair); border-bottom:var(--hair); padding:clamp(60px,7vw,96px) var(--gut) clamp(48px,5vw,72px); overflow:clip; }
+.bk-in{ position:relative; z-index:4; max-width:1340px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,380px); gap:clamp(30px,5vw,80px); align-items:start; }
+@media (max-width:980px){ .bk-in{ grid-template-columns:1fr; } }
+.q{ margin-top:30px; }
+.q > span{ font-family:var(--f-cond); font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:12px; }
+.chips{ display:flex; flex-wrap:wrap; gap:9px; }
+.chips button{
+  padding:10px 17px; font-family:var(--f-cond); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  border:1px solid rgba(201,185,155,.26); color:var(--bone); transition:all .3s var(--ease);
+}
+.chips button:hover{ border-color:var(--bone); color:var(--paper); }
+.chips button[aria-pressed="true"]{ background:var(--rust); border-color:var(--rust); color:#fff; }
+.verdict{
+  background:linear-gradient(170deg,#1f170e,#140e08); border:1px solid rgba(192,142,60,.3);
+  padding:26px 26px 28px; position:sticky; top:110px;
+}
+.verdict .vh{ font-family:var(--f-cond); font-size:10.5px; letter-spacing:.32em; text-transform:uppercase; color:var(--brass); }
+.verdict .vb{ display:flex; gap:18px; align-items:center; margin-top:20px; min-height:132px; }
+.verdict .vb img{ width:62px; height:132px; object-fit:contain; object-position:bottom center; flex:none; }
+.verdict h4{ margin:0; font-family:var(--f-wood); font-size:19px; line-height:1.1; }
+.verdict .vp{ font-family:var(--f-cond); font-size:15px; color:var(--brass); margin-top:8px; letter-spacing:.08em; }
+.verdict .vd{ font-size:13px; color:var(--bone); line-height:1.55; margin-top:9px; }
+.verdict .empty{ font-size:13.5px; color:var(--muted); font-style:italic; line-height:1.6; }
+.verdict .btn{ width:100%; justify-content:center; margin-top:20px; }
+
+/* ============================================================
+   VISIT — three pillars
+   ============================================================ */
+.pillars{ background:var(--ink); padding:clamp(70px,9vw,124px) var(--gut); }
+.pillars-in{ max-width:1340px; margin:0 auto; }
+.ptop{ text-align:center; margin-bottom:clamp(40px,5vw,68px); }
+.ptop p{ margin:16px auto 0; }
+.pgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,28px); }
+@media (max-width:900px){ .pgrid{ grid-template-columns:1fr; } }
+.pill{ position:relative; min-height:clamp(320px,34vw,440px); overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; padding:30px; border:1px solid rgba(201,185,155,.14); }
+.pill img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.45) contrast(1.06) brightness(.56); transition:transform 1.4s var(--ease), filter .7s; }
+.pill::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(14,10,6,.24) 0%, rgba(14,10,6,.46) 30%, rgba(14,10,6,.86) 58%, rgba(14,10,6,.97) 100%); }
+.pill:hover img{ transform:scale(1.07); filter:saturate(.75) contrast(1.02) brightness(.66); }
+.pill > *{ position:relative; z-index:2; }
+.pill h3{ font-family:var(--f-wood); font-size:clamp(22px,2.3vw,31px); line-height:1.05; margin-bottom:12px; }
+.pill p{ margin:0 0 20px; font-size:14px; color:#DCCFB4; line-height:1.6; max-width:34ch; }
+.pill .go{ font-family:var(--f-cond); font-size:10.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--brass); display:inline-flex; gap:9px; align-items:center; }
+
+.praise{ margin-top:clamp(48px,6vw,86px); display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.6vw,42px); padding-top:clamp(34px,4vw,54px); border-top:var(--hair); }
+@media (max-width:860px){ .praise{ grid-template-columns:1fr; gap:26px; } }
+.praise blockquote{ margin:0; }
+.praise q{ font-family:var(--f-cond); font-weight:300; font-size:clamp(16px,1.7vw,21px); line-height:1.35; color:var(--paper); quotes:"“" "”"; }
+.praise cite{ display:block; margin-top:13px; font-family:var(--f-cond); font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--brass); font-style:normal; }
+
+</style>
+</head>
+<body>
+
+<!-- ======================= AGE GATE ======================= -->
+<div id="gate" hidden>
+  <div class="poster" role="dialog" aria-modal="true" aria-labelledby="gate-h">
+    <div class="mark">St. George Spirits</div>
+    <div class="sub">Alameda · California · Est. 1982</div>
+    <div class="rule"></div>
+    <h2 id="gate-h">ID, partner.</h2>
+    <p>House rule since the first batch: we check at the door. Tell us the year you were born and where we'd be sending it.</p>
+    <form class="gate-fields" id="gate-form" novalidate>
+      <div class="gate-row">
+        <div>
+          <label for="g-year">Year of birth</label>
+          <input id="g-year" inputmode="numeric" maxlength="4" placeholder="1987" autocomplete="bday-year">
+        </div>
+        <div>
+          <label for="g-state">Shipping to</label>
+          <select id="g-state">
+            <option value="">Pick a state</option>
+            <option value="CA">California</option>
+            <option value="OTHER">Somewhere else</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn--solid">Step inside</button>
+    </form>
+    <div class="err" id="gate-err" role="alert"></div>
+    <a class="turn" href="https://www.responsibility.org" rel="noopener">I'll come back when I'm 21</a>
+  </div>
+</div>
+
+<!-- ======================= HEADER ======================= -->
+<header class="site" id="hdr">
+  <a class="brand" href="#top">
+    <b>St. George Spirits</b>
+    <span>Alameda, CA · Est. 1982</span>
+  </a>
+
+  <nav class="main" aria-label="Main">
+    <div>
+      <button type="button" aria-haspopup="true">Spirits</button>
+      <div class="panel">
+        <p>Gin that tastes like a forest, vodka that tastes like a pepper patch, and a whiskey that answers to nobody.</p>
+        <a href="spirits/terroir-gin.html">Gin — four of them, no two alike</a>
+        <a href="#backbar">Vodka — built for the cocktail, not the shelf</a>
+        <a href="spirits/baller-single-malt.html">Whiskey — American single malt, Lot by Lot</a>
+        <a href="#backbar">Brandy &amp; Eau de Vie — thirty pounds of fruit, one bottle</a>
+        <a href="#backbar">Liqueur &amp; Aperitivo — bitter, sweet, and a little loud</a>
+        <a href="#backbar">Absinthe — the first one legal in America since 1912</a>
+      </div>
+    </div>
+    <div>
+      <button type="button" aria-haspopup="true">The Distillery</button>
+      <div class="panel">
+        <p>Sixty-five thousand square feet of decommissioned airplane hangar, sitting on an old naval runway in Alameda.</p>
+        <a href="#about">Our story — forty-plus years of it</a>
+        <a href="#about">Three distillers, one legacy</a>
+        <a href="#visit">Visit the tasting room</a>
+        <a href="#visit">Private events in the hangar</a>
+      </div>
+    </div>
+    <div>
+      <button type="button" aria-haspopup="true">The Bar</button>
+      <div class="panel">
+        <p>Recipes worth the effort, and the house rules for drinking them.</p>
+        <a href="#barkeep">Cocktail recipes</a>
+        <a href="#visit">Events &amp; tastings</a>
+        <a href="#visit">Press &amp; awards</a>
+      </div>
+    </div>
+    <div>
+      <button type="button" aria-haspopup="true">Find Us</button>
+      <div class="panel">
+        <p>We can only ship inside California. Everywhere else, we'll tell you who's got it on the shelf.</p>
+        <a href="#backbar">Shop online — California delivery</a>
+        <a href="#visit">Spirit locator — all 50 states</a>
+        <a href="#visit">Trade support</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hdr-right">
+    <a class="locate" href="#visit">
+      <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true"><path d="M6 1C3.8 1 2 2.8 2 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4Z" stroke="currentColor" stroke-width="1.1"/><circle cx="6" cy="5" r="1.4" stroke="currentColor" stroke-width="1.1"/></svg>
+      Spirit Locator
+    </a>
+    <button class="cart" type="button">Cart (0)</button>
+    <button class="burger" type="button" aria-label="Menu"><i></i></button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ======================= HERO ======================= -->
+<section class="hero" id="hero">
+  <div class="hero-stage" id="stage">
+    <div class="hero-poster" aria-hidden="true"></div>
+    <!-- data-park="<seconds>" freezes the film on that moment and holds it as
+         the resting image; omit it to hold the final frame instead.
+         4.92s lands on frame 117: the first frame fully clear of the batwing
+         doors, and the slowest moment in the whole clip. Frame-to-frame motion
+         measured across the sequence bottoms out at 8.26 here, against 11.06
+         at the old 5.35s stop — and it is falling into this frame where it was
+         rising into that one, so the shot is already settling as we halt it. -->
+    <!-- The clip is trimmed to 5.2s. The film is hard-parked at 4.92s and the
+         tail is never reached, so the 5.1s of card game that used to ship
+         after it was ~51% of the file for frames nobody could ever see.
+         HEVC first for Safari, H.264 for everyone else; a browser that
+         understands neither codec string falls through to the poster. -->
+    <video id="hv" poster="assets/img/hero-poster.webp"
+           data-park="4.92"
+           muted playsinline autoplay preload="auto" disablepictureinpicture>
+      <source src="assets/video/hero-720.hevc.mp4" type="video/mp4; codecs=hvc1">
+      <source src="assets/video/hero-720.mp4" type="video/mp4">
+    </video>
+    <div class="hero-grade"></div>
+    <div class="grain" style="opacity:.3"></div>
+    <div class="hero-door" id="door"></div>
+
+    <div class="hero-plate" id="plate1">
+      <div class="inner">
+        <div class="kicker">America's original craft distillery</div>
+        <div class="mark wood"><em>St. George</em><em>Spirits</em></div>
+        <div class="under">Alameda, California &nbsp;·&nbsp; Since 1982</div>
+      </div>
+    </div>
+
+    <div class="hero-plate" id="plate2">
+      <div class="inner">
+        <div class="line">In 1982 there were fewer than twenty distilleries<br>in the whole country. <b>We were one of them.</b></div>
+      </div>
+    </div>
+
+
+    <div class="hero-hint" id="hint">
+      <span>Scroll on in</span>
+      <svg width="13" height="17" viewBox="0 0 13 17" aria-hidden="true"><path d="M6.5 1v15M1.6 11.2 6.5 16l4.9-4.8" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <div class="hero-badge">
+      Pot-distilled · Alameda Point<br>
+      Gin · Vodka · Whiskey · Brandy · Absinthe
+    </div>
+
+    <div class="hero-out" id="heroOut" aria-hidden="true"></div>
+    <div class="hero-rule"><i id="hrule"></i></div>
+  </div>
+</section>
+
+<div class="ticker">
+  <ul>
+    <li>Pot-distilled in Alameda since 1982</li>
+    <li>“Best craft whiskey of the year” — Thrillist</li>
+    <li>First legal American absinthe since 1912</li>
+    <li>California delivery · 21+ · adult signature required</li>
+  </ul>
+</div>
+
+<!-- ======================= BACK BAR ======================= -->
+<section class="backbar" id="backbar">
+  <div class="grain" style="opacity:.3"></div>
+  <div class="bb-head rv">
+    <p class="eyebrow ctr">The back bar</p>
+    <h2 class="h2">Reach for one</h2>
+    <p>Everything on this shelf was made a few hundred feet from a runway. Take one off the bar — give it a turn, read the back label, see what it costs.</p>
+  </div>
+
+  <div class="bar-stage" id="barstage" role="group" aria-roledescription="bottle shelf" aria-label="The back bar" tabindex="-1"></div>
+
+  <div class="bb-dots" id="bbdots" hidden></div>
+
+  <div class="bb-caption" id="bbcap">
+    <div class="nm" id="bbnm">Ten bottles, one shelf</div>
+    <div class="meta" id="bbmeta" hidden></div>
+    <div class="hintline" id="bbhint">Hover a bottle to bring it forward · click to pick it up</div>
+  </div>
+
+  <div class="bb-foot rv">
+    <a class="btn btn--solid" href="#">Shop all spirits <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    <p class="small">Online delivery available within California only. Everywhere else, the <a href="#visit" style="color:var(--brass);border-bottom:1px solid currentColor">spirit locator</a> will find you a bottle.</p>
+  </div>
+</section>
+
+<!-- ======================= BARKEEP ======================= -->
+<section class="barkeep" id="barkeep">
+  <div class="grain" style="opacity:.25"></div>
+  <div class="bk-in">
+    <div class="rv">
+      <p class="eyebrow">Ask the barkeep</p>
+      <h2 class="h2">Tell us what<br>you're after</h2>
+      <p class="lede" style="margin-top:18px">Nobody wants to gamble sixty-five dollars on a liquid they've never tasted. Three questions, and we'll point at a bottle.</p>
+
+      <div class="q">
+        <span>1 — What are you doing with it?</span>
+        <div class="chips" data-group="use">
+          <button type="button" data-v="sip">Sipping it neat</button>
+          <button type="button" data-v="martini">Building a Martini</button>
+          <button type="button" data-v="mix">Mixing something long</button>
+          <button type="button" data-v="gift">Giving it away</button>
+        </div>
+      </div>
+
+      <div class="q">
+        <span>2 — What do you want it to taste like?</span>
+        <div class="chips" data-group="flavor">
+          <button type="button" data-v="green">Green &amp; herbal</button>
+          <button type="button" data-v="citrus">Bright &amp; citrusy</button>
+          <button type="button" data-v="spice">Peppery &amp; spiced</button>
+          <button type="button" data-v="smoke">Smoky &amp; rich</button>
+          <button type="button" data-v="fruit">Fruit-forward</button>
+          <button type="button" data-v="bitter">Bitter</button>
+        </div>
+      </div>
+
+      <div class="q">
+        <span>3 — What are you willing to spend?</span>
+        <div class="chips" data-group="price">
+          <button type="button" data-v="low">Under $35</button>
+          <button type="button" data-v="mid">$35 – $50</button>
+          <button type="button" data-v="high">Whatever it takes</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="verdict rv" id="verdict">
+      <div class="vh">The barkeep says</div>
+      <div class="vb"><p class="empty" id="vempty">Answer a question or two and we'll put something in front of you.</p></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ======================= ABOUT ======================= -->
+<section class="about" id="about">
+  <div class="about-bg"></div>
+  <div class="grain"></div>
+  <div class="about-in">
+    <div class="about-head rv">
+      <div>
+        <p class="eyebrow">Inside the hangar</p>
+        <h2 class="h2">Three distillers.<br><em>One legacy.</em></h2>
+      </div>
+      <p class="lede">A German-born lawyer with a 65-gallon pot still. A nuclear engineer who turned up with a bottle of homemade whiskey as his résumé. A grad student who worked out he was spending his whole teaching salary on booze. Forty years later, the still is still running.</p>
+    </div>
+
+    <div class="founders rv">
+      <figure>
+        <img src="assets/img/about-header.webp" alt="Jörg Rupf, Lance Winters and Dave Smith beside the copper pot still" loading="lazy">
+        <figcaption><b>The three of them</b>Jörg, Lance &amp; Dave · Alameda, California</figcaption>
+      </figure>
+    </div>
+
+    <div class="distillers">
+      <article class="card rv">
+        <div class="shot"><img src="assets/img/jorg.webp" alt="Jörg Rupf, founder of St. George Spirits" loading="lazy"><span class="role">Founder · 1982</span></div>
+        <div class="body">
+          <h3>Jörg Rupf</h3>
+          <p>When Jörg founded St. George in 1982, there was no such thing as "craft distilling" in America. When he ran his first batch of eau de vie on a 65-gallon pot still, he didn't just start a distillery — he started a movement, and then helped a generation of other distillers start theirs.</p>
+          <span class="more">Read more <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.1"/></svg></span>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <div class="shot"><img src="assets/img/lance.webp" alt="Lance Winters, master distiller" loading="lazy"><span class="role">Master Distiller · 1996</span></div>
+        <div class="body">
+          <h3>Lance Winters</h3>
+          <p>Lance applied for a job here in 1996 and his résumé was a bottle of whiskey he'd distilled in his garage. His creative streak built on Jörg's technique to make spirits that were the first of their kind — and are now landmarks of American artisan distilling.</p>
+          <span class="more">Read more <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.1"/></svg></span>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <div class="shot"><img src="assets/img/dave.webp" alt="Dave Smith, head distiller" loading="lazy"><span class="role">Head Distiller · 2005</span></div>
+        <div class="body">
+          <h3>Dave Smith</h3>
+          <p>Dave was focused on grad school when he took a day job here. Now he's a master of the craft. As Lance puts it: "Dave took our single malt, which was good, and turned it great." He sees a spirit like a screenplay — it needs bartenders and drinkers to direct it.</p>
+          <span class="more">Read more <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.1"/></svg></span>
+        </div>
+      </article>
+    </div>
+
+    <div class="thread rv">
+      <div class="big">Eau de vie</div>
+      <p>French for <em>water of life</em> — and the philosophy behind every bottle we fill.
+        <span>Imagine cramming thirty pounds of fruit into one 750ml bottle. That's eau de vie. Whether we're making whiskey, gin, vodka, or something completely off-the-wall, we approach it the same way: start with the best raw material, and get as much of its flavor into the glass as the still will allow.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= VISIT ======================= -->
+<section class="pillars" id="visit">
+  <div class="pillars-in">
+    <div class="ptop rv">
+      <p class="eyebrow ctr">Come by</p>
+      <h2 class="h2">2601 Monarch Street</h2>
+      <p class="lede" style="text-align:center">An old naval air station on the edge of San Francisco Bay. Jörg and Lance once wondered how they'd ever fill a 65,000-square-foot airplane hangar. It's full now.</p>
+    </div>
+
+    <div class="pgrid">
+      <a class="pill rv" href="#backbar">
+        <img src="assets/img/barrels.webp" alt="Whiskey barrels at St. George Spirits" loading="lazy">
+        <h3>Buy a bottle</h3>
+        <p>Ten spirits, delivered anywhere in California. Outside the state, we'll find you the nearest shelf.</p>
+        <span class="go">Shop the shelf <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.1"/></svg></span>
+      </a>
+      <a class="pill rv" href="#visit">
+        <img src="assets/img/stills-lance-dave.webp" alt="The stills inside the St. George hangar in Alameda" loading="lazy">
+        <h3>Visit the hangar</h3>
+        <p>Tasting room, bottle shop, and a tour that gets you right up next to the stills. Book a stool.</p>
+        <span class="go">Plan a visit <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.1"/></svg></span>
+      </a>
+      <a class="pill rv" href="#about">
+        <img src="assets/img/stills.webp" alt="Copper pot stills at St. George Spirits" loading="lazy">
+        <h3>Learn the craft</h3>
+        <p>What's actually in the bottle, how it got there, and forty years of recipes worth arguing about.</p>
+        <span class="go">Go deeper <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.1"/></svg></span>
+      </a>
+    </div>
+
+    <div class="praise rv">
+      <blockquote><q>Best craft whiskey of the year</q><cite>Thrillist</cite></blockquote>
+      <blockquote><q>One of the most distinctive gins made in America</q><cite>GQ — on Terroir Gin</cite></blockquote>
+      <blockquote><q>America's elegant answer to Italy's Campari</q><cite>Spirit Journal — on Bruto Americano</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="site">
+  <div class="f-in">
+    <div class="f-top">
+      <div class="f-brand">
+        <b>St. George Spirits</b>
+        <p>2601 Monarch Street<br>Alameda, California 94501<br>(510) 769-1601</p>
+        <p style="margin-top:14px">America's original artisan distillery. Pot-distilled on the old Alameda Naval Air Station since 1982.</p>
+      </div>
+      <div>
+        <h4>Spirits</h4>
+        <a href="spirits/terroir-gin.html">Gin</a><a href="#backbar">Vodka</a><a href="spirits/baller-single-malt.html">Whiskey</a>
+        <a href="#backbar">Brandy &amp; Eau de Vie</a><a href="#backbar">Liqueur &amp; Aperitivo</a><a href="#backbar">Absinthe</a>
+      </div>
+      <div>
+        <h4>The Distillery</h4>
+        <a href="#about">Our story</a><a href="#about">Three distillers</a><a href="#visit">Visit &amp; tours</a>
+        <a href="#visit">Private events</a><a href="#visit">Press</a><a href="#visit">Careers</a>
+      </div>
+      <div>
+        <h4>Last call</h4>
+        <p class="small" style="margin:0 0 4px">New releases, hangar events, and the occasional recipe. No more than twice a month.</p>
+        <form class="sub-form" onsubmit="event.preventDefault();this.reset();this.querySelector('button').textContent='Done';">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+          <button type="submit">Join</button>
+        </form>
+        <a href="#visit" style="margin-top:14px">Spirit locator — find us near you</a>
+        <a href="#visit">Trade support</a>
+      </div>
+    </div>
+
+    <div class="legal">
+      <h5>Mandatory statements</h5>
+      <p><strong style="color:#8B7E69">Responsible advertiser:</strong> St. George Spirits, Inc., 2601 Monarch Street, Alameda, California 94501 · (510) 769-1601 · stgeorgespirits.com</p>
+      <p class="cls">Class and type, and alcohol content, of products shown on this page: Terroir Gin — gin, 45% alc./vol. · Botanivore Gin — gin, 45% alc./vol. · Dry Rye Gin — gin, 45% alc./vol. · All Purpose Vodka — vodka, 40% alc./vol. · Green Chile Vodka — flavored vodka, 40% alc./vol. · Absinthe Verte — distilled spirits specialty, 60% alc./vol. · Bruto Americano — liqueur, 24% alc./vol. · Baller American Single Malt Whiskey — whisky, 47% alc./vol. · NOLA Coffee Liqueur — liqueur, 25% alc./vol. · Pear Brandy — brandy, 40% alc./vol. No neutral spirits are used in these products except where stated on the label.</p>
+      <p>You must be 21 or older to purchase. Online delivery of spirits is available within California only; adult signature is required at delivery. Availability, price and the ability to ship depend on your address and applicable state law. Please drink responsibly — and never drink and drive.</p>
+      <p style="color:#564E42">This is a design concept built from publicly available product information for presentation purposes. Nothing on this page is an offer to sell alcoholic beverages.</p>
+    </div>
+
+    <div class="f-bot">
+      <span>© 1982–2026 St. George Spirits, Inc.</span>
+      <div>
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="#">Accessibility</a><a href="#">Do not sell my info</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+<script>
+/* ============================================================
+   DATA — real products, real prices (Commerce7 catalogue),
+   real copy from the distillery's own product pages.
+   ============================================================ */
+const BOTTLES = [
+  { id:'pear', name:'Pear Brandy', series:'Brandy & Eau de Vie', price:50, abv:'40% ABV', size:'750 ml', img:'assets/bottles/pear-brandy.webp',
+    blurb:'Our flagship spirit since 1982. A stunningly fruit-forward unsweetened spirit with all the complexity of a perfectly ripe pear.',
+    notes:'The nose is astonishingly fruit-forward; the palate is dry but redolent of ripe Bartlett pears with subtle honey and a hint of spice. Further tasting reveals a buttery richness balanced by steely minerality.',
+    serve:'Neat as a digestif, with tonic, or in a Pear Martini.',
+    tags:{ use:['sip','gift'], flavor:['fruit'], price:'mid' } },
+
+  { id:'terroir', page:'spirits/terroir-gin.html', name:'Terroir Gin', series:'Gin', price:35, abv:'45% ABV', size:'750 ml', img:'assets/bottles/terroir-gin.webp',
+    blurb:'A profoundly lush and aromatic gin with a real sense of place — our ode to the wild beauty of the Golden State.',
+    notes:'A forest in your glass: ultra-woodsy Douglas fir, California bay laurel, a hint of citrus. Sage and wok-roasted coriander suggest hillside thickets; angelica root and Saigon cinnamon evoke the earthy smell of the trail.',
+    serve:'On the rocks, in a Martini, or in a Negroni riff we call the American Werewolf.',
+    tags:{ use:['sip','martini'], flavor:['green'], price:'low' } },
+
+  { id:'botanivore', name:'Botanivore Gin', series:'Gin', price:35, abv:'45% ABV', size:'750 ml', img:'assets/bottles/botanivore-gin.webp',
+    blurb:'A symphony of nineteen botanicals working in concert. Think of a meadow in bloom: herbaceous, fresh, elegant.',
+    notes:'Fresh and elegantly herbaceous, with bright citrus, subtle floral notes, earth and spice. Remarkable for its depth of flavor — perfectly balanced and deeply layered.',
+    serve:'A simple Gin & Tonic, a Bee’s Knees, or a Southside.',
+    tags:{ use:['mix','martini'], flavor:['green','citrus'], price:'low' } },
+
+  { id:'dryrye', name:'Dry Rye Gin', series:'Gin', price:35, abv:'45% ABV', size:'750 ml', img:'assets/bottles/dry-rye-gin.webp',
+    blurb:'A base of 100% pot-distilled rye makes this a gin for whiskey lovers — and a compelling pour for the adventurous gin drinker.',
+    notes:'Structure, spice, a gloriously rich texture and a soft, lush finish. Where some gins lean astringent, Dry Rye’s texture is anything but — think rich and velvety.',
+    serve:'Compelling neat, genre-busting in a Negroni or a very different Martini.',
+    tags:{ use:['sip','martini'], flavor:['spice'], price:'low' } },
+
+  { id:'apv', name:'All Purpose Vodka', series:'Vodka', price:30, abv:'40% ABV', size:'750 ml', img:'assets/bottles/all-purpose-vodka.webp',
+    blurb:'The name says it all. The perfect building block for all your favorite vodka cocktails — approachable, supple, as versatile as you want it to be.',
+    notes:'Fruity-floral hints and a velvety consistency. Lush enough to sip chilled with a twist, with the character to carry a cocktail.',
+    serve:'A Dirty Martini, a White Russian, or an Espresso Martini with our NOLA.',
+    tags:{ use:['mix','martini'], flavor:['citrus'], price:'low' } },
+
+  { id:'chile', name:'Green Chile Vodka', series:'Vodka', price:30, abv:'40% ABV', size:'750 ml', img:'assets/bottles/green-chile-vodka.webp',
+    blurb:'Vibrant vegetality, subtle sweetness and a light touch of heat — a celebration of the kaleidoscope of flavor in fresh sweet and hot peppers.',
+    notes:'Remarkably fresh, with a juicy vegetal quality. The nose is rich and earthy; the palate soft and fruit-forward, supported by herbal cilantro and the tang of lime peel. Finishes with a light touch of heat.',
+    serve:'Bloody Marys, a Moscow Mule with a kick, a split-base Margarita.',
+    tags:{ use:['mix'], flavor:['green','spice'], price:'low' } },
+
+  { id:'absinthe', name:'Absinthe Verte', series:'Absinthe', price:65, abv:'60% ABV', size:'750 ml', img:'assets/bottles/absinthe-verte.webp',
+    blurb:'Real absinthe. No artificial ingredients, no gimmicks — the first legal American absinthe released after the U.S. ban was lifted in 2007.',
+    notes:'A heady, herbaceous smack to the senses. Opens with spicy black licorice, then evolves into citrus and grass with a dose of sarsaparilla. Rich and viscous on the palate, even at 120 proof.',
+    serve:'One large ice cube, then water — for the louche and the aroma.',
+    tags:{ use:['sip','gift'], flavor:['green'], price:'high' } },
+
+  { id:'bruto', name:'Bruto Americano', series:'Aperitivo', price:35, abv:'24% ABV', size:'750 ml', img:'assets/bottles/bruto-americano.webp',
+    blurb:'A bracing dose of bitterness, a bright pop of citrus and intriguing sylvan notes — a bitter aperitivo with classic roots and a fresh attitude.',
+    notes:'Vibrant citrus on the nose, backed by cinnamon, sandalwood and fir. On the palate it leads with bitter before opening into an herbaceous mid-palate and a lingering bitter-citrus finish.',
+    serve:'Anywhere you’d use an Italian red bitter — and a few places you wouldn’t.',
+    tags:{ use:['mix'], flavor:['bitter','citrus'], price:'low' } },
+
+  { id:'baller', page:'spirits/baller-single-malt.html', name:'Baller Single Malt', series:'American Whiskey', price:50, abv:'47% ABV', size:'750 ml', img:'assets/bottles/baller-single-malt.webp',
+    blurb:'American-made, Japanese whisky-inspired, wholly original. Crisp malt, delicate maple charcoal smoke, and tropical sherry-like notes from house-made umeshu finishing casks.',
+    notes:'Crisp and dry on the nose with bright fruit and a hint of smoke. Opens with malt sweetness and maple charcoal, then explodes into plum, mango and lychee. The smoky finish lingers and builds with each sip.',
+    serve:'Neat, in the Shop Highball, or standing in for peated Scotch in a Penicillin.',
+    tags:{ use:['sip','gift'], flavor:['smoke','fruit'], price:'mid' } },
+
+  { id:'nola', name:'NOLA Coffee Liqueur', series:'Liqueur', price:38, abv:'25% ABV', size:'750 ml', img:'assets/bottles/nola-coffee-liqueur.webp',
+    blurb:'Most visitors fall in love with New Orleans; only a lucky few fall in love in New Orleans. Head distiller Dave Smith was one of them.',
+    notes:'Yirgacheffe beans for their bright berry, chocolate and round fruity qualities, complemented by chicory root’s plum and date notes and bitter undertones.',
+    serve:'An incredible Espresso Martini — or neat, alongside dessert.',
+    tags:{ use:['mix','gift'], flavor:['smoke','bitter'], price:'mid' } }
+];
+
+/* ============================================================
+   AGE GATE
+   ============================================================ */
+(function(){
+  const gate = document.getElementById('gate');
+  const form = document.getElementById('gate-form');
+  const err  = document.getElementById('gate-err');
+  const KEY  = 'sgs-gate-v1';
+  let pass = null;
+  try { pass = localStorage.getItem(KEY); } catch(e){}
+
+  if (pass) { gate.remove(); return; }
+
+  gate.hidden = false;
+  document.body.classList.add('is-locked');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const y = parseInt(document.getElementById('g-year').value, 10);
+    const st = document.getElementById('g-state').value;
+    const now = new Date().getFullYear();
+    if (!y || y < 1900 || y > now) { err.textContent = 'Give us a real year.'; return; }
+    if (!st) { err.textContent = 'Pick where we’d be sending it.'; return; }
+    if (now - y < 21) { err.textContent = 'Come back in ' + (21 - (now - y)) + ' years. We’ll keep a stool warm.'; return; }
+    err.textContent = '';
+    try { localStorage.setItem(KEY, JSON.stringify({ y: y, st: st })); } catch(e){}
+    gate.classList.add('is-out');
+    document.body.classList.remove('is-locked');
+    setTimeout(function(){ gate.remove(); }, 750);
+  });
+})();
+
+/* ============================================================
+   HERO — the film plays itself in, then settles on the bar
+   Phase A (scroll 0 → PLAY_END): the shot runs on its own from the
+   street, through the doors and down the bar. Scrolling here does NOT
+   scrub it — it leans on playbackRate instead, so the picture never
+   stutters the way a seek-on-every-frame scrub did. From EASE_FROM
+   (3.0s, out on the street) the rate decays geometrically to MIN_RATE at
+   the park frame, so the camera is already braking before the batwing
+   doors arrive and coasts to rest on the bottles at an even, unbroken
+   rate rather than holding speed and then dropping off a cliff.
+   Phase B (PLAY_END → 1): the film is parked on that frame; the house
+   lights go down and the stage resolves to ink for the hand-off.
+   ============================================================ */
+(function(){
+  const sec    = document.getElementById('hero');
+  const stage  = document.getElementById('stage');
+  const video  = document.getElementById('hv');
+  const door   = document.getElementById('door');
+  const poster = stage ? stage.querySelector('.hero-poster') : null;
+  const p1     = document.getElementById('plate1');
+  const p2     = document.getElementById('plate2');
+  const hint   = document.getElementById('hint');
+  const out    = document.getElementById('heroOut');
+  const rule   = document.getElementById('hrule');
+  if (!sec || !video) return;
+
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const PLAY_END = .46;   // scroll fraction by which the film has settled on the bar
+  const MAX_RATE = 3.4;   // how hard scrolling may hurry the film along
+  const RUSH      = 3.2;  // catch-up rate for someone scrolling ahead of the film
+  const EASE_FROM = 3.0;  // WHERE the coast begins, as a timestamp in the clip, not
+                          // as a span before the park frame. 3.0s is out on the
+                          // street, well before the doors — the brake is already
+                          // on by the time the batwings sweep in at ~4.0s, rather
+                          // than being slammed at them. Everything before 3.0s
+                          // still runs at a flat 24fps.
+  const MIN_RATE  = .55;  // the floor, and it is mostly not a taste call: the clip
+                          // is 24fps, so a frame is held 41.7ms / rate. At .4x that
+                          // is 104ms a frame — ~10fps, which is the judder this
+                          // once ended on. .55x holds 76ms (13.2fps). That is one
+                          // notch past the .60x/14.4fps that used to be called the
+                          // practical limit, spent deliberately: it is only reached
+                          // over the park frames, where footage motion is 8.07 —
+                          // the quietest in the whole clip — so it is the cheapest
+                          // place in the film to buy cadence for speed. If stepping
+                          // ever shows on the bottles, .60 is the safe value.
+
+  const HARD_PARK = .60;  // pB past which the film is pinned, vignette covering it
+
+  // Coming to rest. playbackRate alone can never stop a film smoothly — every
+  // halving of the rate doubles how long one frame sits on screen, so the
+  // smoother you try to make the ending, the more it stutters. The film is
+  // therefore only ever slowed to MIN_RATE, and the last of the deceleration is
+  // handed to the transform: extra scale, eased out over SETTLE_MS. That runs at
+  // the display's refresh rate instead of the clip's, so the push-in carries
+  // past the final frame and glides to a true stop with no cadence cost at all.
+  //
+  // These two numbers are solved, not chosen, and the old pair was simply wrong.
+  // Measured on the park frame, one unit of CSS scale is worth ~750 units of
+  // on-screen motion in the same mean-abs-pixel-diff units used to tune the
+  // ramp. An ease-out cubic opens at 3*SCALE/SECS, so:
+  //      settle opening speed = 3 * SCALE / (MS/1000) * 750   units/sec
+  //      film speed at park   = 8.07 * 24 * MIN_RATE          units/sec
+  // The old .018/2000ms opened at 20 u/s against the film's 116 u/s — the
+  // picture lost FIVE SIXTHS of its speed in one frame at the hand-off, which
+  // is what read as the film still moving and then simply stopping. No amount
+  // of ramp tuning could fix that, because the ramp was never the problem here.
+  // .07/2400ms opens at 66 u/s against 107 u/s: 0.62 of the film's speed
+  // instead of 0.17, so the motion carries through the hand-off and decays for
+  // 2.4s afterwards. Raise SCALE (or shorten MS) to close the gap further —
+  // the cost is push-in, and a 720p source gets soft much past this.
+  const SETTLE_MS = 2400, SETTLE_SCALE = .07;
+  let settle = 0, settleRaf = 0;
+  function runSettle(){
+    const t0 = performance.now();
+    cancelAnimationFrame(settleRaf);
+    const step = function(){
+      const k = clamp((performance.now() - t0) / SETTLE_MS, 0, 1);
+      settle = 1 - Math.pow(1 - k, 3);   // ease-out cubic: quickest at the
+      paint();                           // hand-off, dead still by the end
+      settleRaf = k < 1 ? requestAnimationFrame(step) : 0;
+    };
+    settleRaf = requestAnimationFrame(step);
+  }
+
+  let duration = 0, parkAt = 0, ready = false, parked = false;
+  let target = 0, cur = 0, raf = 0, touched = false;
+  // Declared up here with the rest of the state, not beside paceLoop: the eager
+  // markReady() below can reach startPacing() before that line would have run.
+  let paceRaf = 0;
+
+  function clamp(v,a,b){ return Math.min(b, Math.max(a, v)); }
+  function smooth(v,a,b){ const t = clamp((v-a)/(b-a),0,1); return t*t*(3-2*t); }
+
+  function markReady(){
+    if (ready || !(video.readyState >= 1) || !video.duration) return;
+    duration = video.duration;
+    // data-park="6.4" freezes the film on that second instead of its last
+    // frame — set it to whichever shot should become the resting image.
+    const want = parseFloat(video.dataset.park);
+    parkAt = (isFinite(want) && want > 0) ? Math.min(want, duration) : duration;
+    ready = true;
+    stage.classList.add('ready');
+    paint();
+    startPlayback();
+  }
+  video.addEventListener('loadedmetadata', markReady);
+  video.addEventListener('loadeddata', markReady);
+  video.addEventListener('canplay', markReady);
+  // On a warm cache the file can already be decodable before this script runs,
+  // so none of the events above fire and the hero would sit on the poster.
+  markReady();
+  let tries = 0;
+  const poll = setInterval(function(){
+    markReady();
+    if (ready || ++tries > 40) clearInterval(poll);
+  }, 250);
+
+  const GESTURES = ['pointerdown','keydown','touchstart','wheel'];
+  function armGesture(){
+    // Muted autoplay is normally allowed; if a policy refuses it anyway,
+    // start on the visitor's first real input instead of showing a dead frame.
+    const go = function(){
+      GESTURES.forEach(function(t){ window.removeEventListener(t, go); });
+      video.play().catch(function(){});
+    };
+    GESTURES.forEach(function(t){ window.addEventListener(t, go, { passive:true }); });
+  }
+  function startPlayback(){
+    // Calling play() on an ended element rewinds it to zero, which would throw
+    // the visitor back out to the street mid push-through.
+    if (reduce || parked || !ready || video.ended) return;
+    const pr = video.play();
+    if (pr && pr.catch) pr.catch(armGesture);
+    startPacing();
+  }
+
+  // Last-resort nudge onto the park frame. Fires at most once and never
+  // while a seek is already in flight: `currentTime` reads 0 during a pending
+  // seek, so re-testing it every frame re-issues the seek forever — that seek
+  // storm is the same thing that made the original scrub stutter.
+  let pinned = false;
+  function pinEnd(){
+    if (pinned || !parkAt || video.seeking) return;
+    pinned = true;
+    const want = Math.max(0, parkAt - (parkAt >= duration ? .25 : .02));
+    // One frame of tolerance (24fps -> 41.7ms), not .4s. The point of parking
+    // is landing on an EXACT frame, and .4s was only ever safe while the clip
+    // ran to 10.04s — with it trimmed to 5.2s the natural end sits just .31s
+    // past the target, i.e. inside the old tolerance, so an overrun would be
+    // silently accepted and the film would rest on the wrong frame.
+    if (Math.abs(video.currentTime - want) < .05) return;
+    try { video.currentTime = want; } catch(e){}
+  }
+
+  function park(){
+    if (parked) return;
+    parked = true;
+    cancelAnimationFrame(paceRaf); paceRaf = 0;
+    video.playbackRate = 1;
+    try { video.pause(); } catch(e){}
+    pinEnd();
+    if (!reduce) runSettle();
+    paint();
+  }
+  video.addEventListener('ended', park);
+
+  function filmProgress(){
+    if (parked) return 1;
+    return parkAt > 0 ? clamp(video.currentTime / parkAt, 0, 1) : 0;
+  }
+
+  function readProgress(){
+    const rect = sec.getBoundingClientRect();
+    const span = sec.offsetHeight - window.innerHeight;
+    if (span <= 0) return 0;
+    return clamp(-rect.top / span, 0, 1);
+  }
+
+  // A fully transparent plate still costs a blur + composite every frame, so
+  // hide it outright rather than animating something nobody can see.
+  function plate(el, a, dy, blur, grow){
+    if (a < .004) {
+      if (el.style.visibility !== 'hidden') { el.style.visibility = 'hidden'; el.style.opacity = '0'; }
+      return;
+    }
+    if (el.style.visibility) el.style.visibility = '';
+    el.style.opacity = a.toFixed(3);
+    el.style.transform = 'translateY(' + ((1-a) * dy).toFixed(1) + 'px)' +
+      (grow ? ' scale(' + ((1 - grow) + a * grow).toFixed(4) + ')' : '');
+    el.style.filter = 'blur(' + ((1-a) * blur).toFixed(2) + 'px)';
+  }
+
+  // The bar fills as the film runs, then as you scroll — so it still reads as
+  // progress during the stretch where the visitor isn't touching anything.
+  function drawRule(){
+    const r = Math.max(cur, filmProgress() * PLAY_END);
+    rule.style.transform = 'scaleX(' + r.toFixed(4) + ')';
+  }
+
+  function pace(){
+    if (reduce || !ready || parked) return;
+
+    // Don't wait on the `ended` event: a last `timeupdate` can land first, and
+    // acting on it while the element is already finished rewinds it to zero.
+    if (video.ended || video.currentTime >= parkAt - .06) { park(); return; }
+
+    const pA = clamp(cur / PLAY_END, 0, 1);
+    const pB = clamp((cur - PLAY_END) / (1 - PLAY_END), 0, 1);
+
+    // Safety net for someone who flung the page straight down: they are still
+    // out on the street and no playback rate closes that gap, so pin the frame
+    // with pinEnd()'s single guarded seek — the only seek this hero issues, and
+    // by here the vignette is dark enough to cover it. Past this point the film
+    // never advances again, so the card game at the tail is never reached.
+    if (pB > HARD_PARK) { park(); return; }
+
+    // Hurrying the film along reads better than cutting to it...
+    let want = pB > 0 ? RUSH : 1 + pA * (MAX_RATE - 1);
+
+    // ...but from EASE_FROM on, the deceleration takes over whatever the scroll
+    // is asking for. The curve is geometric, not polynomial: rate = MIN^u with u
+    // running 0 -> 1 across the ramp, so the film loses the SAME PERCENTAGE of
+    // its speed every tenth of a second all the way down. That is what reads as
+    // one continuous ramp. A k^n curve (this used k^5) spends its whole drop in
+    // the first third and then crawls at the floor — which is exactly the "fine,
+    // then suddenly very slow" ending being fixed here. For the record, across
+    // 3.0 -> 4.92s this holds 1.00x, .90x, .82x, .74x, .67x, .61x, .55x — each
+    // step ~9.5% off the one before it, with no cliff and no flat tail.
+    const span = Math.max(.25, parkAt - EASE_FROM);
+    if (video.currentTime > EASE_FROM) {
+      const u = clamp((video.currentTime - EASE_FROM) / span, 0, 1);
+      want = Math.min(want, Math.pow(MIN_RATE, u));
+    }
+
+    // .005, not .02: the deadband is the resolution of the ramp. At .02 the rate
+    // can only move in 2% notches, and a 1.0 -> .6 descent is then eight or nine
+    // visible steps instead of a glide. At .005 each notch is under half a
+    // percent — below what the eye can pick out as a change of speed.
+    if (Math.abs(video.playbackRate - want) > .005) video.playbackRate = want;
+    if (video.paused) startPlayback();
+  }
+
+  // The ramp has to be re-evaluated every displayed frame. `timeupdate` fires
+  // about four times a second, so driving the rate off it alone re-created the
+  // staircase the deadband above was just narrowed to remove — and it is the
+  // common case, because the film plays itself in while nobody is scrolling
+  // (the paint() rAF only runs while a scroll is actually being chased).
+  // This loop costs a few multiplications a frame and stops dead at park.
+  function paceLoop(){
+    paceRaf = 0;
+    if (reduce || parked) return;
+    pace();
+    if (!parked) paceRaf = requestAnimationFrame(paceLoop);
+  }
+  function startPacing(){
+    if (!paceRaf && !reduce && !parked) paceRaf = requestAnimationFrame(paceLoop);
+  }
+
+  function paint(){
+    const p  = cur;
+    const pA = clamp(p / PLAY_END, 0, 1);
+    const pB = clamp((p - PLAY_END) / (1 - PLAY_END), 0, 1);
+
+    // The film does its own pushing in, so the transform only ever drifts —
+    // a hard scroll-driven zoom on a 720p frame just turns it to mush.
+    const scale = 1 + pA * .045 + Math.pow(pB, 1.4) * .18 + settle * SETTLE_SCALE;
+    const tf = 'scale(' + scale.toFixed(4) + ')';
+    video.style.transform = tf;
+    if (poster) poster.style.transform = tf;
+
+    door.style.opacity = smooth(p, .58, .88).toFixed(3);
+
+    plate(p1, 1 - smooth(p, .02, .20), -34, 12, .035);
+    plate(p2, smooth(p, .26, .38) * (1 - smooth(p, .58, .70)), 22, 9, 0);
+
+    // Fade the whole stage to the page's own ink before the sticky frame
+    // releases, so the hand-off to the ticker has no visible seam.
+    const veil = smooth(p, .82, 1);
+    out.style.opacity = veil.toFixed(3);
+    out.style.visibility = veil < .004 ? 'hidden' : '';
+
+    hint.style.opacity = touched ? '0' : String(1 - smooth(p, 0, .05));
+    drawRule();
+    pace();
+  }
+
+  function frame(){
+    const t = target;
+    cur += (t - cur) * .16;
+    if (Math.abs(t - cur) < .0004) cur = t;
+    paint();
+    if (Math.abs(t - cur) > .0001) raf = requestAnimationFrame(frame);
+    else raf = 0;
+  }
+
+  function onScroll(){
+    const p = readProgress();
+    if (p > .004) touched = true;
+    target = p;
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+
+  if (reduce) {
+    sec.style.height = '100svh';
+    try { video.pause(); } catch(e){}
+    plate(p1, 1, 0, 0, 0);
+    hint.style.opacity = 0;
+    return;
+  }
+
+  // timeupdate (~4Hz) is enough to keep the progress bar and the playback
+  // rate honest while the film runs and nobody is scrolling.
+  video.addEventListener('timeupdate', function(){ drawRule(); pace(); });
+
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState !== 'visible') {
+      // rAF is suspended while hidden, so pace() cannot park the film — left
+      // playing, it runs clean past the park frame to the end of the clip.
+      // Hold it here; the branch below re-arms playback on the way back.
+      if (!parked) { try { video.pause(); } catch(e){} }
+      return;
+    }
+    cur = readProgress(); target = cur;
+    paint();
+    // rAF is suspended while the tab is hidden, so the ramp loop's pending
+    // callback may or may not be delivered on the way back. Drop the stale id
+    // and re-arm from scratch rather than trusting it to resume.
+    cancelAnimationFrame(paceRaf); paceRaf = 0;
+    if (!parked && cur < PLAY_END) startPlayback();
+    else startPacing();
+  });
+
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  paint();
+})();
+
+/* ============================================================
+   THE BACK BAR — standing-bottle shelf with spring physics
+   Bottles rest at a slight angle; the one you point at squares
+   up, lifts off the plank and nudges its neighbours aside.
+   ============================================================ */
+(function(){
+  const stage = document.getElementById('barstage');
+  const dots  = document.getElementById('bbdots');
+  const capNm = document.getElementById('bbnm');
+  const capMe = document.getElementById('bbmeta');
+  const capHi = document.getElementById('bbhint');
+  if (!stage) return;
+
+  const N = BOTTLES.length;
+  const MAXH = 400, MINH = 170, CARMAXH = 420;
+  const GAP = .10, FRONT_EXTRA = .34, EDGE = 52;
+  const PLANK_T = 19, FOOT = 64;
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function clamp(v,a,b){ return Math.min(b, Math.max(a, v)); }
+  function restAngle(i){ return (i % 2 ? 1 : -1) * (5 + ((i*3+2) % 5)); }
+  function restTilt(i){ return ((i*7+3) % 5 - 2) * .55; }
+
+  // per-bottle aspect, measured once images load
+  const asp = BOTTLES.map(function(){ return .30; });
+
+  let H = 300, W = 0, carousel = false, carIndex = 0;
+  let active = null, open = null;
+
+  const S = { x:[], vx:[], tx:[], turn:[], vturn:[], tturn:[], lift:[], vlift:[], tlift:[],
+              tilt:[], vtilt:[], tag:[], vtag:[], acc:[], px:[], pv:[], raf:0, last:0, drag:-1, grab:0, free:0 };
+
+  // ---- build DOM ------------------------------------------------
+  const plank = document.createElement('div');
+  plank.className = 'plank';
+  plank.innerHTML = '<div class="top"></div><div class="grainy"></div><div class="glow"></div><div class="lip"></div>';
+  const bk1 = document.createElement('div'); bk1.className = 'brkt'; bk1.style.left = '7%';
+  const bk2 = document.createElement('div'); bk2.className = 'brkt'; bk2.style.right = '7%';
+  plank.appendChild(bk1); plank.appendChild(bk2);
+  stage.appendChild(plank);
+
+  const nodes = BOTTLES.map(function(b, i){
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'bot';
+    btn.setAttribute('data-i', i);
+    if (b.page) btn.setAttribute('data-slug', b.page.split('/').pop().replace('.html',''));
+    btn.setAttribute('aria-label', b.name + ', $' + b.price);
+    btn.tabIndex = i === 0 ? 0 : -1;
+    btn.innerHTML =
+      '<span class="bot-sway">' +
+        '<span class="bot-shadow"></span>' +
+        '<span class="bot-refl"><img src="' + b.img + '" alt="" draggable="false" decoding="async" loading="lazy"></span>' +
+        '<span class="bot-turn">' +
+          '<img src="' + b.img + '" alt="" draggable="false" decoding="async" loading="lazy">' +
+        '</span>' +
+      '</span>' +
+      '<span class="bot-tag"><span class="str"></span><span class="chip">$' + b.price + '</span></span>' +
+      '<span class="bot-open">Pick it up</span>';
+    stage.appendChild(btn);
+
+    const img = btn.querySelector('.bot-turn img');
+    function measure(){
+      if (img.naturalWidth) { asp[i] = img.naturalWidth / img.naturalHeight; layout(); }
+    }
+    // NOTE: do NOT call measure() synchronously here. This runs inside the
+    // BOTTLES.map() that is still initialising `const nodes`, and
+    // measure() -> layout() reads `nodes` -> TDZ ReferenceError, which
+    // aborts the whole shelf. On a cold cache img.complete is false and the
+    // bug hides; on a warm cache it is true and the shelf never renders.
+    if (img.complete) requestAnimationFrame(measure); else img.addEventListener('load', measure);
+
+    return { btn:btn, sway:btn.querySelector('.bot-sway'), turn:btn.querySelector('.bot-turn'),
+             img:img, shadow:btn.querySelector('.bot-shadow'), tag:btn.querySelector('.bot-tag'),
+             open:btn.querySelector('.bot-open') };
+  });
+
+  // dots for carousel mode
+  BOTTLES.forEach(function(b, i){
+    const d = document.createElement('button');
+    d.type = 'button'; d.tabIndex = -1; d.setAttribute('aria-label', b.name);
+    d.addEventListener('click', function(){ choose(i); });
+    dots.appendChild(d);
+  });
+
+  function footprint(i, e){ return H * asp[i] * (1 + FRONT_EXTRA * clamp(e, 0, 1)); }
+
+  function targets(){
+    const feet = BOTTLES.map(function(_, i){ return footprint(i, i === active ? 1 : 0); });
+    if (carousel) {
+      const gap = GAP * H * 1.6;
+      const c = clamp(active === null ? carIndex : active, 0, N - 1);
+      const xs = feet.map(function(){ return 0; });
+      xs[c] = W / 2;
+      for (let i = c + 1; i < N; i++) xs[i] = xs[i-1] + (feet[i-1] + feet[i]) / 2 + gap;
+      for (let i = c - 1; i >= 0; i--) xs[i] = xs[i+1] - (feet[i+1] + feet[i]) / 2 - gap;
+      return xs;
+    }
+    const total = feet.reduce(function(a,b){ return a + b; }, 0);
+    const restGap = clamp((W - 2*EDGE - total) / Math.max(1, N - 1), GAP * H * .5, H * .26);
+    let cursor = (W - (total + restGap * (N - 1))) / 2;
+    return feet.map(function(f){ const x = cursor + f/2; cursor += f + restGap; return x; });
+  }
+
+  function layout(){
+    W = stage.clientWidth;
+    if (!W) return;
+    const chrome = 320;
+    const byH = (window.innerHeight - chrome) ;
+    const unit = BOTTLES.reduce(function(a,_,i){ return a + asp[i] + GAP; }, 0) + FRONT_EXTRA * .33;
+    const fit = (W - 2*EDGE) / unit;
+    carousel = fit < MINH;
+    const raw = carousel ? Math.min(CARMAXH, W * .74, byH) : Math.min(MAXH, fit, byH);
+    H = Math.round(Math.max(150, raw));
+
+    stage.style.height = (H + PLANK_T + FOOT) + 'px';
+    plank.style.top = H + 'px';
+    plank.style.height = PLANK_T + 'px';
+    bk1.style.left = '7%'; bk2.style.right = '7%';
+
+    dots.hidden = !carousel;
+    if (typeof caption === 'function') caption();
+    nodes.forEach(function(n, i){
+      const w = H * asp[i];
+      n.btn.style.width = w + 'px';
+      n.btn.style.height = H + 'px';
+      n.btn.style.top = '0px';
+      n.shadow.style.width = (w * 1.05) + 'px';
+      n.tag.style.left = '50%';
+      n.tag.style.top = (H * .20) + 'px';
+      n.open.style.top = (H + PLANK_T + 24) + 'px';
+    });
+
+    const xs = targets();
+    const fresh = S.x.length !== N;
+    for (let i = 0; i < N; i++) {
+      S.tx[i] = xs[i];
+      S.tturn[i] = i === active ? 0 : restAngle(i);
+      S.tlift[i] = i === active ? 1 : 0;
+      if (fresh || reduce) {
+        S.x[i] = xs[i]; S.vx[i] = 0; S.px[i] = xs[i]; S.pv[i] = 0; S.acc[i] = 0;
+        S.turn[i] = S.tturn[i]; S.vturn[i] = 0;
+        S.lift[i] = S.tlift[i]; S.vlift[i] = 0;
+        S.tilt[i] = restTilt(i); S.vtilt[i] = 0;
+        S.tag[i] = 0; S.vtag[i] = 0;
+      }
+    }
+    if (fresh) { S.x.length = N; for (let i = 0; i < N; i++) paint(i); }
+    kick();
+  }
+
+  function paint(i){
+    const n = nodes[i];
+    const w = H * asp[i];
+    const lift = S.lift[i] || 0;
+    const turn = S.turn[i] || 0;
+    const tilt = S.tilt[i] || 0;
+
+    n.btn.style.transform = 'translate3d(' + ((S.x[i] || 0) - w/2).toFixed(2) + 'px,0,0)';
+    n.btn.style.zIndex = (i === active ? 40 : 10 + i);
+    n.sway.style.transform = 'rotate(' + tilt.toFixed(3) + 'deg)';
+    n.turn.style.transform =
+      'perspective(900px) translateY(' + (-lift * H * .055).toFixed(2) + 'px) ' +
+      'rotateY(' + turn.toFixed(2) + 'deg) translateZ(' + (lift * 34).toFixed(1) + 'px) ' +
+      'scale(' + (1 + lift * .035).toFixed(4) + ')';
+    n.img.style.filter = 'brightness(' + (.69 + lift * .38).toFixed(3) + ') saturate(' + (.78 + lift * .28).toFixed(3) + ')';
+    n.shadow.style.opacity = (1 - lift * .25).toFixed(3);
+    n.shadow.style.transform = 'translateX(-50%) translateY(' + (lift * 5).toFixed(1) + 'px) scaleX(' + (1 + lift * .34).toFixed(3) + ')';
+    n.tag.style.transform = 'translateX(-50%) rotate(' + (-7 + (S.tag[i] || 0)).toFixed(2) + 'deg)';
+    if (i === active) n.btn.setAttribute('data-front',''); else n.btn.removeAttribute('data-front');
+  }
+
+  function step(now){
+    const dt = S.last ? Math.min(.1, (now - S.last) / 1000) : 1/60;
+    S.last = now;
+    const sub = Math.max(2, Math.ceil(dt / .017));
+    const sdt = dt / sub;
+    const spacing = function(i){
+      return (footprint(i, S.lift[i] || 0) + footprint(i+1, S.lift[i+1] || 0)) / 2 + H * .012;
+    };
+    for (let i = 0; i < N; i++) S.px[i] = S.x[i] || 0;
+
+    for (let k = 0; k < sub; k++) {
+      for (let i = 0; i < N; i++) {
+        if (i === S.drag) continue;
+        const restoring = now > S.free;
+        const kx = restoring ? 140 : 0;
+        const cx = restoring ? 2 * Math.sqrt(140) * .85 : 3.2;
+        S.vx[i] = (S.vx[i]||0) + (-kx * ((S.x[i]||0) - (S.tx[i]||0)) - cx * (S.vx[i]||0)) * sdt;
+        S.x[i]  = (S.x[i]||0) + S.vx[i] * sdt;
+      }
+      // separation
+      for (let pass = 0; pass < 2; pass++) {
+        for (let i = 0; i < N - 1; i++) {
+          const over = spacing(i) - ((S.x[i+1]||0) - (S.x[i]||0));
+          if (over <= 0) continue;
+          if (i === S.drag) S.x[i+1] += over;
+          else if (i+1 === S.drag) S.x[i] -= over;
+          else { S.x[i] -= over/2; S.x[i+1] += over/2; }
+          const va = S.vx[i]||0, vb = S.vx[i+1]||0;
+          if (va > vb) { const m = (va+vb)/2, kk = (va-vb)*.14;
+            if (i !== S.drag) S.vx[i] = m - kk;
+            if (i+1 !== S.drag) S.vx[i+1] = m + kk; }
+        }
+      }
+      if (!carousel && N > 0) {
+        const first = EDGE*.4 + footprint(0, S.lift[0]||0)/2;
+        const last  = W - EDGE*.4 - footprint(N-1, S.lift[N-1]||0)/2;
+        if ((S.x[0]||0) < first) { S.x[0] = first; S.vx[0] = Math.abs(S.vx[0]||0)*.3; }
+        if ((S.x[N-1]||0) > last) { S.x[N-1] = last; S.vx[N-1] = -Math.abs(S.vx[N-1]||0)*.3; }
+      }
+      for (let i = 0; i < N; i++) {
+        S.vturn[i] = (S.vturn[i]||0) + (-160*((S.turn[i]||0)-(S.tturn[i]||0)) - 2*Math.sqrt(160)*.8*(S.vturn[i]||0)) * sdt;
+        S.turn[i]  = (S.turn[i]||0) + S.vturn[i]*sdt;
+        S.vlift[i] = (S.vlift[i]||0) + (-190*((S.lift[i]||0)-(S.tlift[i]||0)) - 2*Math.sqrt(190)*.78*(S.vlift[i]||0)) * sdt;
+        S.lift[i]  = (S.lift[i]||0) + S.vlift[i]*sdt;
+        // base sway, nudged by horizontal acceleration
+        const rt = restTilt(i) * (1 - (S.lift[i]||0));
+        S.vtilt[i] = (S.vtilt[i]||0) + (-30*((S.tilt[i]||0)-rt) - 2.6*(S.vtilt[i]||0) + (S.acc[i]||0)*.0016) * sdt;
+        S.tilt[i]  = clamp((S.tilt[i]||0) + S.vtilt[i]*sdt, -9, 9);
+        // the price tag swings a beat behind the bottle
+        S.vtag[i] = (S.vtag[i]||0) + (-50*((S.tag[i]||0) - (S.tilt[i]||0)*.75) - 3.6*(S.vtag[i]||0) - (S.vtilt[i]||0)*.9) * sdt;
+        S.tag[i]  = clamp((S.tag[i]||0) + S.vtag[i]*sdt, -26, 26);
+      }
+    }
+
+    let busy = S.drag >= 0 || now < S.free;
+    for (let i = 0; i < N; i++) {
+      const v = ((S.x[i]||0) - (S.px[i]||0)) / dt;
+      const a = (v - (S.pv[i]||0)) / dt;
+      S.pv[i] = v;
+      S.acc[i] = (S.acc[i]||0)*.5 + clamp(a, -26000, 26000)*.5;
+      paint(i);
+      if (Math.abs(S.vx[i]||0) > .4 || Math.abs((S.x[i]||0)-(S.tx[i]||0)) > .3 ||
+          Math.abs((S.turn[i]||0)-(S.tturn[i]||0)) > .05 || Math.abs(S.vturn[i]||0) > .05 ||
+          Math.abs((S.lift[i]||0)-(S.tlift[i]||0)) > .002 || Math.abs(S.vlift[i]||0) > .01 ||
+          Math.abs(S.vtilt[i]||0) > .05 || Math.abs(S.vtag[i]||0) > .08 || Math.abs(S.acc[i]||0) > 1) busy = true;
+    }
+    if (busy) S.raf = requestAnimationFrame(step);
+    else { S.raf = 0; S.last = 0; }
+  }
+
+  function kick(){
+    if (reduce) { for (let i = 0; i < N; i++) paint(i); return; }
+    if (!S.raf) { S.last = 0; S.raf = requestAnimationFrame(step); }
+  }
+  function impulse(i, amt){
+    if (reduce || i < 0 || i >= N) return;
+    S.vtilt[i] = (S.vtilt[i]||0) + amt;
+    kick();
+  }
+
+  function caption(){
+    const b = active === null ? null : BOTTLES[active];
+    if (b) {
+      capNm.textContent = b.name;
+      capMe.hidden = false;
+      capMe.textContent = b.series + ' · $' + b.price + ' · ' + b.abv;
+      capHi.textContent = carousel ? 'Tap to pick it up' : 'Click to pick it up';
+    } else {
+      capNm.textContent = 'Ten bottles, one shelf';
+      capMe.hidden = true;
+      capHi.textContent = carousel ? 'Swipe along the bar · tap to pick one up'
+                                   : 'Hover a bottle to bring it forward · click to pick it up';
+    }
+    Array.prototype.forEach.call(dots.children, function(d, i){
+      d.setAttribute('aria-current', String((active === null ? carIndex : active) === i));
+    });
+  }
+
+  function choose(i){
+    if (i === active) return;
+    const prev = active;
+    active = i;
+    if (i !== null) carIndex = i;
+    for (let k = 0; k < N; k++) {
+      S.tturn[k] = k === active ? 0 : restAngle(k);
+      S.tlift[k] = k === active ? 1 : 0;
+      nodes[k].btn.tabIndex = (k === (active === null ? 0 : active)) ? 0 : -1;
+    }
+    const xs = targets();
+    for (let k = 0; k < N; k++) S.tx[k] = xs[k];
+    if (i !== null) { impulse(i - 1, -5.5); impulse(i + 1, 5.5); }
+    if (prev !== null) { impulse(prev - 1, 2.4); impulse(prev + 1, -2.4); }
+    caption();
+    kick();
+  }
+
+  // ---- pointer --------------------------------------------------
+  const P = { id:-1, i:-1, x:0, y:0, moved:false, kind:'', lastX:0, lastT:0, v:0 };
+
+  function nearest(cx, cy){
+    const box = stage.getBoundingClientRect();
+    const x = cx - box.left, y = cy - box.top;
+    if (y < -14 || y > H + PLANK_T + 14) return null;
+    let best = null, d0 = Infinity;
+    for (let i = 0; i < N; i++) {
+      const half = footprint(i, S.lift[i]||0)/2 + 5;
+      const d = Math.abs(x - (S.x[i]||0));
+      if (d < half && d < d0) { best = i; d0 = d; }
+    }
+    return best;
+  }
+
+  stage.addEventListener('pointermove', function(e){
+    if (P.id === e.pointerId) {
+      const dx = e.clientX - P.x;
+      const now = performance.now();
+      if (!P.moved && Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(e.clientY - P.y)) {
+        P.moved = true;
+        if (stage.isConnected) stage.setPointerCapture(e.pointerId);
+        if (!carousel && P.i >= 0) { S.drag = P.i; S.grab = (e.clientX - stage.getBoundingClientRect().left) - (S.x[P.i]||0); }
+      }
+      if (P.moved) {
+        P.v = P.v*.6 + ((e.clientX - P.lastX)/Math.max(1, now - P.lastT))*.4;
+        P.lastX = e.clientX; P.lastT = now;
+        if (S.drag >= 0) {
+          S.vx[S.drag] = P.v * 1000;
+          S.x[S.drag] = e.clientX - stage.getBoundingClientRect().left - S.grab;
+          S.free = now + 900; kick();
+        } else if (carousel) {
+          const xs = targets();
+          for (let i = 0; i < N; i++) S.tx[i] = xs[i] + dx;
+          kick();
+        }
+      }
+      return;
+    }
+    if (e.pointerType !== 'mouse' || carousel || open !== null) return;
+    const hit = nearest(e.clientX, e.clientY);
+    if (hit !== null) choose(hit);
+    else if (active !== null) {
+      const box = stage.getBoundingClientRect();
+      if (Math.abs(e.clientX - box.left - (S.x[active]||0)) > footprint(active, 1)/2 + 12) choose(null);
+    }
+  });
+
+  stage.addEventListener('pointerdown', function(e){
+    if (e.button !== 0) return;
+    const hit = nearest(e.clientX, e.clientY);
+    P.id = e.pointerId; P.i = hit === null ? -1 : hit; P.x = e.clientX; P.y = e.clientY;
+    P.moved = false; P.kind = e.pointerType; P.lastX = e.clientX; P.lastT = performance.now(); P.v = 0;
+  });
+
+  function finish(e, cancelled){
+    if (P.id !== e.pointerId) return;
+    if (stage.hasPointerCapture && stage.hasPointerCapture(e.pointerId)) stage.releasePointerCapture(e.pointerId);
+    const was = { moved:P.moved, i:P.i, kind:P.kind, v:P.v, x:P.x };
+    P.id = -1;
+    if (S.drag >= 0) {
+      const idle = performance.now() - P.lastT;
+      S.vx[S.drag] = (S.vx[S.drag]||0) * clamp(1 - idle/120, 0, 1);
+      S.drag = -1; S.free = performance.now() + 700; kick();
+      return;
+    }
+    if (was.moved && carousel) {
+      const dx = e.clientX - was.x;
+      const adv = (Math.abs(dx) > 40 || Math.abs(was.v) > .45) ? (dx < 0 ? 1 : -1) : 0;
+      choose(clamp((active === null ? carIndex : active) + adv, 0, N - 1));
+      for (let i = 0; i < N; i++) impulse(i, clamp(-was.v * 4, -6, 6));
+      return;
+    }
+    if (cancelled || was.moved || was.i < 0) return;
+    if (was.kind !== 'mouse' && active !== was.i) { choose(was.i); return; }
+    openDetail(was.i);
+  }
+  stage.addEventListener('pointerup', function(e){ finish(e, false); });
+  stage.addEventListener('pointercancel', function(e){ finish(e, true); });
+  stage.addEventListener('pointerleave', function(e){
+    if (e.pointerType === 'mouse' && P.id < 0 && !carousel && open === null) choose(null);
+  });
+
+  stage.addEventListener('keydown', function(e){
+    const keys = ['ArrowRight','ArrowLeft','Home','End'];
+    if (keys.indexOf(e.key) < 0) return;
+    e.preventDefault();
+    const from = active === null ? 0 : active;
+    const next = e.key === 'Home' ? 0 : e.key === 'End' ? N - 1
+      : clamp(from + (e.key === 'ArrowRight' ? 1 : -1), 0, N - 1);
+    choose(next);
+    nodes[next].btn.focus({ preventScroll:true });
+  });
+
+  nodes.forEach(function(n, i){
+    n.btn.addEventListener('focus', function(){ if (P.id < 0) choose(i); });
+    n.btn.addEventListener('click', function(e){ if (e.detail === 0) openDetail(i); });
+  });
+
+  // ---- detail overlay -------------------------------------------
+  let detail = null;
+  function openDetail(i){
+    if (open !== null) return;
+    open = i;
+    choose(i);
+    if (window.SGSound) window.SGSound.play('glass', .5);
+    const b = BOTTLES[i];
+    const src = nodes[i].turn.getBoundingClientRect();
+
+    detail = document.createElement('div');
+    detail.className = 'detail';
+    detail.setAttribute('role','dialog');
+    detail.setAttribute('aria-modal','true');
+    detail.setAttribute('aria-label', b.name);
+    detail.innerHTML =
+      '<div class="scrim"></div>' +
+      '<button class="close" type="button">Close <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3l10 10M13 3L3 13"/></svg></button>' +
+      '<div class="wrap">' +
+        '<div class="figure" style="--ar:' + asp[i].toFixed(4) + '">' +
+          '<div class="spin">' +
+            '<div class="face"><img src="' + b.img + '" alt="' + b.name + '" draggable="false"></div>' +
+            '<div class="face notes"><div class="notecard">' +
+              '<span class="sm">In the glass</span>' +
+              '<h4>' + b.name + '</h4>' +
+              '<div class="ln"></div>' +
+              '<p>' + b.notes + '</p>' +
+              '<div class="ln"></div>' +
+              '<span class="sm">Serve it</span>' +
+              '<p>' + b.serve + '</p>' +
+            '</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="info">' +
+          '<div class="idx">' + String(i+1).padStart(2,'0') + ' / ' + String(N).padStart(2,'0') + ' · ' + b.series + '</div>' +
+          '<h3>' + b.name + '</h3>' +
+          '<div class="pricerow"><span class="pr">$' + b.price + '</span>' +
+            '<span class="chip">' + b.abv + '</span><span class="chip">' + b.size + '</span>' +
+            '<span class="chip">Alameda, CA</span></div>' +
+          '<p>' + b.blurb + '</p>' +
+          '<div class="facebtns" role="group" aria-label="Bottle or notes">' +
+            '<button type="button" data-f="bottle" aria-pressed="true">The bottle</button>' +
+            '<button type="button" data-f="notes" aria-pressed="false">The notes</button>' +
+          '</div>' +
+          '<div class="acts">' +
+            '<button class="btn btn--solid" type="button">Add to cart — $' + b.price + '</button>' +
+            (b.page ? '<a class="btn btn--page" href="' + b.page + '">The full story <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden="true"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" stroke-width="1.2"/></svg></a>' : '') +
+            '<a class="btn" href="#visit">Find one near me</a>' +
+          '</div>' +
+          '<p class="small" style="margin-top:16px">Delivery within California only. Adult signature required.</p>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(detail);
+    document.body.classList.add('is-locked');
+
+    const fig  = detail.querySelector('.figure');
+    const spin = detail.querySelector('.spin');
+    const btns = detail.querySelectorAll('.facebtns button');
+    const closeBtn = detail.querySelector('.close');
+
+    // FLIP from the shelf
+    if (!reduce && src.width > 0) {
+      const to = fig.getBoundingClientRect();
+      const sc = src.height / to.height;
+      const dx = src.left + src.width/2 - (to.left + to.width/2);
+      const dy = src.top - to.top;
+      nodes[i].btn.style.visibility = 'hidden';
+      fig.animate([
+        { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + sc + ')' },
+        { transform: 'translate(' + dx*.4 + 'px,' + (dy*.4 - 70) + 'px) scale(' + ((sc+1)/2*1.04) + ') rotate(' + (dx>0?-3:3) + 'deg)', offset:.5 },
+        { transform: 'none' }
+      ], { duration: 700, easing: 'cubic-bezier(.22,.85,.3,1)' });
+    }
+
+    requestAnimationFrame(function(){ detail.classList.add('in'); });
+
+    // spin spring
+    const A = { v:0, t:0, vel:0, raf:0, last:0, drag:false, sx:0, sa:0, auto:0 };
+    function loop(now){
+      const dt = A.last ? Math.min(.1, (now - A.last)/1000) : 1/60;
+      A.last = now;
+      const steps = Math.max(1, Math.ceil(dt/.017));
+      for (let k = 0; k < steps; k++) {
+        A.vel += (-95*(A.v - A.t) - 2*Math.sqrt(95)*.8*A.vel) * (dt/steps);
+        A.v   += A.vel * (dt/steps);
+      }
+      spin.style.transform = 'rotateY(' + A.v.toFixed(2) + 'deg)';
+      if (Math.abs(A.v - A.t) < .05 && Math.abs(A.vel) < .05) { A.v = A.t; spin.style.transform = 'rotateY(' + A.v + 'deg)'; A.raf = 0; A.last = 0; return; }
+      A.raf = requestAnimationFrame(loop);
+    }
+    function spinTo(face){
+      clearTimeout(A.auto); A.auto = 0;
+      const base = Math.round(A.v / 360) * 360;
+      A.t = base + (face === 'notes' ? 180 : 0);
+      if (Math.abs(A.t - A.v) > 180) A.t -= 360 * Math.sign(A.t - A.v);
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', String(x.dataset.f === face)); });
+      if (reduce) { A.v = A.t; A.vel = 0; spin.style.transform = 'rotateY(' + A.v + 'deg)'; return; }
+      if (!A.raf) A.raf = requestAnimationFrame(loop);
+    }
+    btns.forEach(function(x){ x.addEventListener('click', function(){ spinTo(x.dataset.f); }); });
+    if (!reduce) A.auto = setTimeout(function(){ spinTo('notes'); }, 1500);
+
+    fig.addEventListener('pointerdown', function(e){
+      clearTimeout(A.auto); A.auto = 0;
+      A.drag = true; A.sx = e.clientX; A.sa = A.v;
+      cancelAnimationFrame(A.raf); A.raf = 0; A.last = 0;
+      fig.setPointerCapture(e.pointerId);
+    });
+    fig.addEventListener('pointermove', function(e){
+      if (!A.drag) return;
+      A.v = clamp(A.sa + (e.clientX - A.sx) * .7, A.sa - 260, A.sa + 260);
+      spin.style.transform = 'rotateY(' + A.v.toFixed(2) + 'deg)';
+    });
+    function release(){
+      if (!A.drag) return;
+      A.drag = false;
+      const f = ((A.v % 360) + 360) % 360;
+      spinTo(f > 90 && f < 270 ? 'notes' : 'bottle');
+    }
+    fig.addEventListener('pointerup', release);
+    fig.addEventListener('pointercancel', release);
+
+    function shut(){
+      if (open === null) return;
+      clearTimeout(A.auto);
+      cancelAnimationFrame(A.raf);
+      const idx = open; open = null;
+      detail.classList.remove('in');
+      const to = nodes[idx].turn.getBoundingClientRect();
+      const from = fig.getBoundingClientRect();
+      const done = function(){
+        detail.remove(); detail = null;
+        document.body.classList.remove('is-locked');
+        nodes[idx].btn.style.visibility = '';
+        nodes[idx].btn.focus({ preventScroll:true });
+        impulse(idx, (idx % 2 ? 1 : -1) * 6);
+      };
+      if (reduce || to.width === 0) { done(); return; }
+      spinTo('bottle');
+      const sc = to.height / from.height;
+      const dx = to.left + to.width/2 - (from.left + from.width/2);
+      const dy = to.top - from.top;
+      const an = fig.animate([
+        { transform:'none' },
+        { transform:'translate(' + dx*.6 + 'px,' + (dy*.6 - 40) + 'px) scale(' + ((sc+1)/2) + ')', offset:.55 },
+        { transform:'translate(' + dx + 'px,' + dy + 'px) scale(' + sc + ')' }
+      ], { duration: 540, easing:'cubic-bezier(.45,0,.55,1)', fill:'forwards' });
+      an.onfinish = done;
+    }
+    closeBtn.addEventListener('click', shut);
+    detail.querySelector('.scrim').addEventListener('click', shut);
+    detail.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') { e.preventDefault(); shut(); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        spinTo(btns[0].getAttribute('aria-pressed') === 'true' ? 'notes' : 'bottle');
+      }
+    });
+    closeBtn.focus({ preventScroll:true });
+  }
+
+  // first-load: brush the bottles so they settle with a little life
+  let brushed = false;
+  const io = new IntersectionObserver(function(en){
+    if (!en[0].isIntersecting || brushed || reduce) return;
+    brushed = true;
+    BOTTLES.forEach(function(_, i){ setTimeout(function(){ impulse(i, 7 - i*.4); }, 70 + i*55); });
+    io.disconnect();
+  }, { threshold:.2 });
+  io.observe(stage);
+
+  const ro = new ResizeObserver(function(){ layout(); });
+  ro.observe(stage);
+  window.addEventListener('resize', layout);
+  layout();
+  caption();
+})();
+
+/* ============================================================
+   ASK THE BARKEEP — guided selling (tier-2 interactivity)
+   ============================================================ */
+(function(){
+  const sel = { use:null, flavor:null, price:null };
+  const box = document.getElementById('verdict');
+  if (!box) return;
+  let lastVerdict = null;
+  const body = box.querySelector('.vb');
+
+  document.querySelectorAll('.chips').forEach(function(grp){
+    const key = grp.dataset.group;
+    grp.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        const v = b.dataset.v;
+        const now = sel[key] === v ? null : v;
+        sel[key] = now;
+        grp.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', String(x.dataset.v === now)); });
+        render();
+      });
+    });
+  });
+
+  function band(p){ return p < 35 ? 'low' : p <= 50 ? 'mid' : 'high'; }
+
+  function render(){
+    if (!sel.use && !sel.flavor && !sel.price) {
+      body.innerHTML = '<p class="empty">Answer a question or two and we’ll put something in front of you.</p>';
+      lastVerdict = null;
+      const old = box.querySelector('.btn'); if (old) old.remove();
+      return;
+    }
+    let best = null, bestScore = -1;
+    BOTTLES.forEach(function(b){
+      let s = 0;
+      if (sel.use && b.tags.use.indexOf(sel.use) > -1) s += 3;
+      if (sel.flavor && b.tags.flavor.indexOf(sel.flavor) > -1) s += 3;
+      if (sel.price) {
+        if (sel.price === 'high') s += 1 + b.price / 100;
+        else if (band(b.price) === sel.price) s += 2;
+      }
+      if (s > bestScore) { bestScore = s; best = b; }
+    });
+    // pop the cork only when the recommendation CHANGES — re-rendering the
+    // same bottle on every chip click would machine-gun the sound
+    if (window.SGSound && best && best.id !== lastVerdict) {
+      if (lastVerdict !== null) window.SGSound.play('cork', .45);
+      lastVerdict = best.id;
+    }
+    body.innerHTML =
+      '<img src="' + best.img + '" alt="">' +
+      '<div><h4>' + best.name + '</h4>' +
+         '<div class="vp">$' + best.price + ' · ' + best.abv + '</div>' +
+         '<div class="vd">' + best.blurb + '</div></div>';
+    let btn = box.querySelector('.btn');
+    if (!btn) { btn = document.createElement('a'); btn.className = 'btn btn--solid'; box.appendChild(btn); }
+    btn.href = '#backbar';
+    btn.textContent = 'Pour me a ' + best.name;
+  }
+})();
+</script>
+</body>
+</html>

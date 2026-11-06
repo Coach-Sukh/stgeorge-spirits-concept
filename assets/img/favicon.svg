@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#110C07"/>
+  <!-- copper pot still: onion body, swan neck, lyne arm -->
+  <g fill="none" stroke="#C08E3C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 50h20"/>
+    <path d="M24 50c-3-6-3-13 1-17 3-3 3-6 1-9h12c-2 3-2 6 1 9 4 4 4 11 1 17"/>
+    <path d="M38 26c6 1 9 5 9 11v6"/>
+    <path d="M43 43h8"/>
+  </g>
+  <circle cx="32" cy="15" r="2.6" fill="#B23A20"/>
+</svg>
