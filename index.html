@@ -509,36 +509,52 @@
 
 /* Scoped to the class JS stamps at load, NOT to a width. The JS mode is
    fixed for the session, so a width-based rule would un-hide the <video> on
-   rotation to landscape — and on this path that element has no sources. */
+   rotation to landscape — and on this path that element has no sources.
+
+   The still is a BAND, not a background. Full-bleed in a portrait stage,
+   `cover` showed only ~40% of the frame's width and cut the group in half;
+   the bottles and the three men span 625 of the frame's 1280px and simply
+   cannot coexist in a 375-wide crop of a 698-tall box. So the image keeps
+   its own aspect at full width — nothing is cropped, the group stays
+   centred — and the wordmark sits beneath it on the ink. */
 html.is-small .hero{ height:auto; }
-html.is-small .hero-stage{ position:relative; height:86svh; min-height:460px; }
+html.is-small .hero-stage{
+  position:relative; height:auto; min-height:0; display:block;
+  padding-bottom:clamp(34px,8vw,58px);
+}
 html.is-small #hv,
 html.is-small .hero-door,
 html.is-small .hero-hint,
 html.is-small .hero-out,
 html.is-small .hero-rule,
-html.is-small .hero-poster{ display:none !important; }
+html.is-small .hero-poster,
+html.is-small .hero-grade,
+html.is-small .hero-badge,
+html.is-small #plate2{ display:none !important; }
 
 html.is-small .hero-still{
-  display:block; position:absolute; inset:0;
-  width:100%; height:100%; object-fit:cover; object-position:58% 50%;
+  display:block; position:static;
+  width:100%; height:auto; aspect-ratio:900/673; object-fit:cover;
+  /* melt the photo into the ink rather than ending on a hard edge */
+  -webkit-mask-image:linear-gradient(180deg,#000 74%,rgba(0,0,0,0) 100%);
+          mask-image:linear-gradient(180deg,#000 74%,rgba(0,0,0,0) 100%);
 }
-/* the film's grade was driven by JS; the still needs its own */
-html.is-small .hero-grade{
-  background:linear-gradient(180deg, rgba(17,12,7,.82) 0%, rgba(17,12,7,.20) 34%,
-                                     rgba(17,12,7,.30) 62%, rgba(17,12,7,.94) 100%);
-  opacity:1 !important;
+
+/* The header floats over the band. Without this the brand sits on top of a
+   lit lantern and stops being readable. */
+html.is-small .hero-stage::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:120px;
+  background:linear-gradient(180deg, rgba(17,12,7,.92) 0%, rgba(17,12,7,.55) 45%, rgba(17,12,7,0) 100%);
+  z-index:2; pointer-events:none;
 }
-/* both plates are JS-positioned for the film; show the first, statically */
-html.is-small #plate2{ display:none !important; }
+
 html.is-small #plate1{
   opacity:1 !important; transform:none !important;
-  position:absolute; inset:auto 0 0 0;
-  padding:0 var(--gut) clamp(42px,9vw,74px); display:block;
+  position:static; display:block;
+  padding:clamp(18px,4vw,26px) var(--gut) 0; margin-top:-9%;
 }
 html.is-small #plate1 .inner{ transform:none !important; text-align:left; }
-html.is-small #plate1 .mark{ font-size:clamp(40px,13.5vw,66px); }
-html.is-small .hero-badge{ display:none; }
+html.is-small #plate1 .mark{ font-size:clamp(40px,13.2vw,64px); }
 
 /* ---- back bar: tap grid for small screens ---------------------- */
 .bb-grid{ display:none; }
@@ -738,6 +754,11 @@ html.is-small .hero-badge{ display:none; }
 <section class="hero" id="hero">
   <div class="hero-stage" id="stage">
     <div class="hero-poster" aria-hidden="true"></div>
+    <!-- Small screens get the room instead of the walk-in: the film's scroll
+         choreography needs height and a pointer, and 1.6 MB of video is a poor
+         trade on a phone. This is the same park frame the film settles on. -->
+    <img class="hero-still" src="assets/img/hero-interior.webp" width="900" height="673"
+         alt="The bar at St. George Spirits: ten bottles along the counter, Jörg, Lance and Dave over a hand of cards." decoding="async">
     <!-- data-park="<seconds>" freezes the film on that moment and holds it as
          the resting image; omit it to hold the final frame instead.
          4.92s lands on frame 117: the first frame fully clear of the batwing
@@ -785,10 +806,7 @@ html.is-small .hero-badge{ display:none; }
       Gin · Vodka · Whiskey · Brandy · Absinthe
     </div>
 
-    <!-- Small screens get the room instead of the walk-in: the film's scroll
-         choreography needs height and a pointer, and 1.6 MB of video is a poor
-         trade on a phone. This is the same park frame the film settles on. -->
-    <img class="hero-still" src="assets/img/hero-interior.webp" alt="" aria-hidden="true" decoding="async">
+
 
     <div class="hero-out" id="heroOut" aria-hidden="true"></div>
     <div class="hero-rule"><i id="hrule"></i></div>
