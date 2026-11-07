@@ -224,3 +224,48 @@ nav.main > div.tapped > button::after{ transform:scaleX(1); }
 nav.main > div.tapped .panel{ opacity:1; visibility:visible; transform:none; }
 
 @media (max-width:1100px){ .snd .eq{ display:none !important; } }
+
+/* ============================================================
+   MOBILE — the header must survive 320px
+   The bar is brand + sound + cart + burger. At 320 that needed
+   ~348px and pushed the burger 48px off-screen with no way to
+   scroll to it. Let the brand give up space first, shrink the
+   gaps, and drop the cart's word before anything leaves.
+   ============================================================ */
+@media (max-width:900px){
+  header.site{ gap:10px; }
+  .brand{ min-width:0; flex:1 1 auto; overflow:hidden; }
+  .brand b{ display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .brand span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block; }
+  .hdr-right{ gap:12px; flex:0 0 auto; }
+}
+@media (max-width:420px){
+  .hdr-right{ gap:10px; }
+  .cart{ font-size:0; display:flex; align-items:center; }      /* icon-only */
+  .cart::before{
+    content:"Cart"; font-family:var(--f-cond); font-size:10.5px;
+    letter-spacing:.18em; text-transform:uppercase;
+  }
+  .brand span{ display:none; }
+}
+@media (max-width:360px){
+  .brand b{ font-size:15px; }
+  .cart::before{ font-size:10px; }
+}
+
+/* ---- touch targets ---------------------------------------------
+   Anything you tap wants ~44px. These controls were 26-34px tall,
+   which is a miss-prone target on a phone. Grow the hit area with
+   padding rather than type size, so nothing about the look changes.
+   ---------------------------------------------------------------- */
+@media (hover:none), (max-width:760px){
+  .snd{ min-height:44px; min-width:44px; justify-content:center; }
+  .burger{ min-height:44px; min-width:44px; justify-content:center; align-items:center; }
+  .cart{ min-height:44px; display:inline-flex; align-items:center; }
+  .brand{ min-height:44px; display:flex; flex-direction:column; justify-content:center; }
+  .f-top a{ padding:11px 0; }
+  .f-bot a{ padding:8px 0; display:inline-block; }
+  .sub-form input{ min-height:46px; }
+  .sub-form button{ min-height:46px; }
+  .panel a{ padding:12px 0; }
+}

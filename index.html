@@ -501,6 +501,89 @@
 .praise q{ font-family:var(--f-cond); font-weight:300; font-size:clamp(16px,1.7vw,21px); line-height:1.35; color:var(--paper); quotes:"“" "”"; }
 .praise cite{ display:block; margin-top:13px; font-family:var(--f-cond); font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--brass); font-style:normal; }
 
+
+/* ============================================================
+   MOBILE HERO — the room, not the walk-in
+   ============================================================ */
+.hero-still{ display:none; }
+
+/* Scoped to the class JS stamps at load, NOT to a width. The JS mode is
+   fixed for the session, so a width-based rule would un-hide the <video> on
+   rotation to landscape — and on this path that element has no sources. */
+html.is-small .hero{ height:auto; }
+html.is-small .hero-stage{ position:relative; height:86svh; min-height:460px; }
+html.is-small #hv,
+html.is-small .hero-door,
+html.is-small .hero-hint,
+html.is-small .hero-out,
+html.is-small .hero-rule,
+html.is-small .hero-poster{ display:none !important; }
+
+html.is-small .hero-still{
+  display:block; position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover; object-position:58% 50%;
+}
+/* the film's grade was driven by JS; the still needs its own */
+html.is-small .hero-grade{
+  background:linear-gradient(180deg, rgba(17,12,7,.82) 0%, rgba(17,12,7,.20) 34%,
+                                     rgba(17,12,7,.30) 62%, rgba(17,12,7,.94) 100%);
+  opacity:1 !important;
+}
+/* both plates are JS-positioned for the film; show the first, statically */
+html.is-small #plate2{ display:none !important; }
+html.is-small #plate1{
+  opacity:1 !important; transform:none !important;
+  position:absolute; inset:auto 0 0 0;
+  padding:0 var(--gut) clamp(42px,9vw,74px); display:block;
+}
+html.is-small #plate1 .inner{ transform:none !important; text-align:left; }
+html.is-small #plate1 .mark{ font-size:clamp(40px,13.5vw,66px); }
+html.is-small .hero-badge{ display:none; }
+
+/* ---- back bar: tap grid for small screens ---------------------- */
+.bb-grid{ display:none; }
+@media (max-width:760px){
+  .bb-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    padding:0 var(--gut); margin-top:6px;
+  }
+  .bb-card{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    gap:3px; padding:20px 12px 18px; background:var(--ink-3);
+    border:1px solid rgba(201,185,155,.14);
+    transition:border-color .25s var(--ease), background .25s var(--ease);
+  }
+  .bb-card:active{ background:var(--ink-4); border-color:rgba(201,185,155,.34); }
+  .bb-card .shot{ height:150px; display:flex; align-items:flex-end; justify-content:center; }
+  .bb-card .shot img{
+    height:100%; width:auto; max-width:100%; object-fit:contain;
+    filter:drop-shadow(0 14px 18px rgba(0,0,0,.6));
+  }
+  .bb-card .nm{
+    font-family:var(--f-wood); font-size:14.5px; line-height:1.15;
+    color:var(--paper); margin-top:12px;
+  }
+  .bb-card .sr{
+    font-family:var(--f-cond); font-size:9px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .bb-card .pr{
+    font-family:var(--f-cond); font-size:14px; color:var(--brass);
+    letter-spacing:.05em; margin-top:5px;
+  }
+}
+
+/* ---- general mobile tightening --------------------------------- */
+@media (max-width:760px){
+  .ticker ul{ gap:28px; padding-left:var(--gut); padding-right:var(--gut); justify-content:flex-start; }
+  .bb-head p, .bb-foot .small{ max-width:none; }
+  /* the detail overlay is the main tap target on mobile — give it room */
+  .detail .wrap{ padding-top:58px; }
+  .detail .acts{ width:100%; }
+  .detail .acts .btn{ flex:1 1 auto; justify-content:center; }
+  /* stop the barkeep chips from crowding */
+  .q{ margin-bottom:20px; }
+}
 </style>
 </head>
 <body>
@@ -669,9 +752,9 @@
          understands neither codec string falls through to the poster. -->
     <video id="hv" poster="assets/img/hero-poster.webp"
            data-park="4.92"
-           muted playsinline preload="auto" disablepictureinpicture>
-      <source src="assets/video/hero-720.hevc.mp4" type="video/mp4; codecs=hvc1">
-      <source src="assets/video/hero-720.mp4" type="video/mp4">
+           data-hevc="assets/video/hero-720.hevc.mp4"
+           data-mp4="assets/video/hero-720.mp4"
+           muted playsinline preload="none" disablepictureinpicture>
     </video>
     <div class="hero-grade"></div>
     <div class="grain" style="opacity:.3"></div>
@@ -701,6 +784,11 @@
       Pot-distilled · Alameda Point<br>
       Gin · Vodka · Whiskey · Brandy · Absinthe
     </div>
+
+    <!-- Small screens get the room instead of the walk-in: the film's scroll
+         choreography needs height and a pointer, and 1.6 MB of video is a poor
+         trade on a phone. This is the same park frame the film settles on. -->
+    <img class="hero-still" src="assets/img/hero-interior.webp" alt="" aria-hidden="true" decoding="async">
 
     <div class="hero-out" id="heroOut" aria-hidden="true"></div>
     <div class="hero-rule"><i id="hrule"></i></div>
@@ -1010,6 +1098,14 @@ const BOTTLES = [
 // typed a year and picked a state the walk-in would already be over. The
 // gate owns this latch; the hero module waits on it.
 window.__sgsGateOpen = false;
+// One definition of "small screen", shared by the hero and the back bar.
+// Both swap to a static, tap-first layout below this width.
+window.__sgsSmall = window.matchMedia('(max-width: 760px)').matches;
+// Stamp the decision on <html> so CSS and JS can never disagree. The JS mode
+// is fixed at load (tearing the modules down mid-session is not worth it), so
+// a pure media query would un-hide the <video> on rotation to landscape —
+// and that video has no sources on this path, which would mean a blank hero.
+if (window.__sgsSmall) document.documentElement.classList.add('is-small');
 (function(){
   const gate = document.getElementById('gate');
   const form = document.getElementById('gate-form');
@@ -1068,6 +1164,25 @@ window.__sgsGateOpen = false;
   if (!sec || !video) return;
 
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Small screens show a static interior still instead of the film. Return
+  // before any source is attached, so the 1.6 MB clip is never requested.
+  if (window.__sgsSmall) { stage.classList.add('ready'); return; }
+
+  // Desktop: build the sources now (they are data-* in the markup precisely
+  // so that the mobile path above can opt out of the download).
+  (function(){
+    const add = function(src, type){
+      if (!src) return;
+      const el = document.createElement('source');
+      el.src = src; el.type = type;
+      video.appendChild(el);
+    };
+    add(video.dataset.hevc, 'video/mp4; codecs=hvc1');
+    add(video.dataset.mp4,  'video/mp4');
+    video.preload = 'auto';
+    video.load();
+  })();
 
   const PLAY_END = .46;   // scroll fraction by which the film has settled on the bar
   const MAX_RATE = 3.4;   // how hard scrolling may hurry the film along
@@ -1949,6 +2064,42 @@ window.__sgsGateOpen = false;
     io.disconnect();
   }, { threshold:.2 });
   io.observe(stage);
+
+  // ============================================================
+  // SMALL SCREENS — a grid you can actually tap
+  //
+  // The physics shelf is a pointer-first idea. On a phone it put ~2 of 10
+  // bottles on screen, swipe competed with tap for the same gesture, and a
+  // tap only SELECTED — you had to tap the same bottle twice to open it,
+  // which reads as broken. Replace it with a plain grid: one tap, one
+  // bottle. The detail overlay is untouched and already works here; the
+  // FLIP inside it no-ops on its own because the hidden shelf node
+  // measures zero.
+  // ============================================================
+  if (window.__sgsSmall) {
+    stage.hidden = true;
+    dots.hidden = true;
+    const cap = document.getElementById('bbcap');
+    if (cap) cap.hidden = true;
+
+    const grid = document.createElement('div');
+    grid.className = 'bb-grid';
+    BOTTLES.forEach(function(b, i){
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'bb-card';
+      card.setAttribute('aria-label', b.name + ', $' + b.price);
+      card.innerHTML =
+        '<span class="shot"><img src="' + b.img + '" alt="" loading="lazy" decoding="async"></span>' +
+        '<span class="nm">' + b.name + '</span>' +
+        '<span class="sr">' + b.series + '</span>' +
+        '<span class="pr">$' + b.price + '</span>';
+      card.addEventListener('click', function(){ openDetail(i); });
+      grid.appendChild(card);
+    });
+    stage.parentNode.insertBefore(grid, stage.nextSibling);
+    return;                       // no layout, no rAF, no pointer physics
+  }
 
   const ro = new ResizeObserver(function(){ layout(); });
   ro.observe(stage);
